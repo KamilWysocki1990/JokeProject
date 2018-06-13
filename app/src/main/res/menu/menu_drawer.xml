@@ -1,4 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+
+    <item
+        android:id="@+id/item_drawer_first"
+        android:title="Your Database"
+        android:icon="@drawable/ic_folder_icon_24dp"
+        />
+
+    <item
+        android:id="@+id/item_drawer_second"
+        android:title="Send Personalized Joke"
+        android:icon="@drawable/ic_folder_icon_24dp"
+        />
+
+    <item
+        android:id="@+id/item_drawer_third"
+        android:title="Search via Category"
+        android:icon="@drawable/ic_folder_icon_24dp"/>
+
+
 </menu>

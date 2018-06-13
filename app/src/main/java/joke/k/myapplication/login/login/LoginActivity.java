@@ -14,6 +14,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import joke.k.myapplication.R;
 import joke.k.myapplication.login.JokeApplication;
+import joke.k.myapplication.login.drawer.DrawerActivity;
 import joke.k.myapplication.login.joke.JokeActivity;
 
 public class LoginActivity extends AppCompatActivity implements LoginContract.View {
@@ -60,7 +61,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
 
     @Override
     public void logIn() {
-        startActivityJokes();
+        startActivityDrawer();
     }
 
     @Override
@@ -69,8 +70,8 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         loginPassword.setError(null);
     }
 
-    private void startActivityJokes(){
-        Intent intent = new Intent(getApplicationContext(), JokeActivity.class);
+    private void startActivityDrawer(){
+        Intent intent = new Intent(getApplicationContext(), DrawerActivity.class);
         startActivity(intent);
     }
 
