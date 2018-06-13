@@ -8,6 +8,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
+import android.view.MenuItem;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -50,6 +52,34 @@ public class DrawerActivity extends AppCompatActivity{
 
 
     }
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            drawerLayout.openDrawer(Gravity.START);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+
+
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(Gravity.START)) {
+            drawerLayout.closeDrawers();
+        } else if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
+            getSupportFragmentManager().popBackStackImmediate();
+        } else {
+            finish();
+        }
+    }
+
+
+
     private void showFragment(int itemId) {
         String fragmentTag = String.valueOf(itemId);
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -67,7 +97,7 @@ public class DrawerActivity extends AppCompatActivity{
                     break;
                 }
                 case R.id.item_drawer_third: {
-                    fragmentToAdd = new ThirdFragment();
+                    fragmentToAdd = new ThirPredFragment();
                     break;
                 }
             }

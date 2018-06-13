@@ -23,7 +23,7 @@ public class LoginPresenter implements LoginContract.Presenter {
     }
 
     private boolean validate(String input) {
-        return input.length() >= 5;
+        return input.length() >= 0;
     }
 
 }

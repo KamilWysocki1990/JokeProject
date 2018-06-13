@@ -15,6 +15,6 @@ public class SecondFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_first_drawer,container,false);
+        return inflater.inflate(R.layout.fragment_second_drawer,container,false);
     }
 }
