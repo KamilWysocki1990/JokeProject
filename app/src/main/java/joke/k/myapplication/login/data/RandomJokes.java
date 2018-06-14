@@ -1,4 +1,4 @@
-package com.myapp.k.myapp.data;
+package joke.k.myapplication.login.data;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;

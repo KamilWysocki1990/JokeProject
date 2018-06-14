@@ -1,13 +1,15 @@
-package com.myapp.k.myapp.dao;
+package joke.k.myapplication.login.dao;
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 
-import com.myapp.k.myapp.data.RandomJokes;
+
 
 import java.util.List;
+
+import joke.k.myapplication.login.data.RandomJokes;
 
 @Dao
 public interface JokesDao {

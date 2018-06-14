@@ -1,4 +1,4 @@
-package com.myapp.k.myapp.jokes;
+package joke.k.myapplication.login.drawer.fragments.jokeFragment;
 
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleObserver;
@@ -6,13 +6,14 @@ import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.OnLifecycleEvent;
 import android.view.MotionEvent;
 
-import com.myapp.k.myapp.api.Api;
-import com.myapp.k.myapp.dao.JokesDao;
-import com.myapp.k.myapp.data.RandomJokes;
+
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
+import joke.k.myapplication.login.api.Api;
+import joke.k.myapplication.login.dao.JokesDao;
+import joke.k.myapplication.login.data.RandomJokes;
 
 public class JokesPresenter implements JokesContract.Presenter, LifecycleObserver {
     private JokesContract.View view;

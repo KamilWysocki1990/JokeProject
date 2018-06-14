@@ -1,11 +1,13 @@
-package com.myapp.k.myapp.jokes;
+package joke.k.myapplication.login.drawer.fragments.jokeFragment;
 
 
 import android.view.MotionEvent;
 
-import com.myapp.k.myapp.data.RandomJokes;
+
 
 import java.util.List;
+
+import joke.k.myapplication.login.data.RandomJokes;
 
 public interface JokesContract {
 

@@ -14,9 +14,9 @@ import android.view.MenuItem;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import joke.k.myapplication.R;
-import joke.k.myapplication.login.drawer.fragments.FirstFragment;
 import joke.k.myapplication.login.drawer.fragments.SecondFragment;
 import joke.k.myapplication.login.drawer.fragments.ThirdFragment;
+import joke.k.myapplication.login.drawer.fragments.jokeFragment.JokesActivity;
 
 public class DrawerActivity extends AppCompatActivity{
 
@@ -48,7 +48,7 @@ public class DrawerActivity extends AppCompatActivity{
             return true;
         });
 
-        showFragment(R.id.item_drawer_first);
+        showFragment(R.id.item_drawer_second);
 
 
     }
@@ -89,7 +89,7 @@ public class DrawerActivity extends AppCompatActivity{
 
             switch (itemId) {
                 case R.id.item_drawer_first: {
-                    fragmentToAdd = new FirstFragment();
+                    fragmentToAdd = new JokesActivity();
                     break;
                 }
                 case R.id.item_drawer_second: {
@@ -97,7 +97,7 @@ public class DrawerActivity extends AppCompatActivity{
                     break;
                 }
                 case R.id.item_drawer_third: {
-                    fragmentToAdd = new ThirPredFragment();
+                    fragmentToAdd = new ThirdFragment();
                     break;
                 }
             }

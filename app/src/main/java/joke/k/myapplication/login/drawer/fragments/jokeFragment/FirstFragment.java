@@ -1,4 +1,4 @@
-package joke.k.myapplication.login.drawer.fragments;
+package joke.k.myapplication.login.drawer.fragments.jokeFragment;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

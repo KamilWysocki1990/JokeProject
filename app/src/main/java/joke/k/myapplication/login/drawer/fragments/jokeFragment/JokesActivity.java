@@ -1,41 +1,34 @@
-package com.myapp.k.myapp.jokes;
+package joke.k.myapplication.login.drawer.fragments.jokeFragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.NotificationCompat;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.gson.Gson;
-import com.myapp.k.myapp.JokesApplication;
-import com.myapp.k.myapp.R;
-import com.myapp.k.myapp.api.Api;
-import com.myapp.k.myapp.data.RandomJokes;
-import com.myapp.k.myapp.drawer.DrawerActivity;
-import com.myapp.k.myapp.fragments.databaseFragment.DatabaseFragmentAdapter;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import butterknife.OnTouch;
 import io.reactivex.disposables.CompositeDisposable;
+import joke.k.myapplication.R;
+import joke.k.myapplication.login.JokeApplication;
+import joke.k.myapplication.login.api.Api;
+import joke.k.myapplication.login.data.RandomJokes;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class JokesActivity extends AppCompatActivity implements JokesContract.View {
+public class JokesActivity extends Fragment implements JokesContract.View {
 
-    public static final String NOTIFICATION_CHANNEL_ID = "channelId";
-    public static final String NOTIFICATION_NAME = "Channel";
+
 
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -49,28 +42,20 @@ public class JokesActivity extends AppCompatActivity implements JokesContract.Vi
     @BindView(R.id.joke_progress)
     ProgressBar jokeProgress;
 
-    @BindView(R.id.joke_toolbar)
-    Toolbar jokeToolbar;
 
     private Api api;
     private JokesContract.Presenter presenter;
     private List<RandomJokes> jokes = new ArrayList<>();
-    private DatabaseFragmentAdapter jokesAdapter;
 
 
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_jokes);
-        ButterKnife.bind(this);
 
-        setSupportActionBar(jokeToolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle(R.string.joke_App);
-            getSupportActionBar().setTitle("");
-        }
+
+        @Nullable
+        @Override
+        public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+            View view = inflater.inflate(R.layout.fragment_jokes, container, false);
+            ButterKnife.bind(this, view);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Api.BASE_URL)
@@ -79,11 +64,11 @@ public class JokesActivity extends AppCompatActivity implements JokesContract.Vi
                 .build();
 
         presenter = new JokesPresenter(this,
-                retrofit.create(Api.class), JokesApplication.getRoom().jokesDao()
+                retrofit.create(Api.class), JokeApplication.getRoom().jokesDao()
 
         );
 
-
+ return view;
     }
 
     @Override
@@ -103,8 +88,8 @@ public class JokesActivity extends AppCompatActivity implements JokesContract.Vi
 
     @Override
     public void actionAfterLeftToRightSwap(RandomJokes randomJokes) {
-        Toast.makeText(this, "Joke saved to Database", Toast.LENGTH_LONG).show();
-       JokesApplication.getRoom().jokesDao().insert(randomJokes);
+        Toast.makeText(getContext(), "Joke saved to Database", Toast.LENGTH_LONG).show();
+       JokeApplication.getRoom().jokesDao().insert(randomJokes);
     }
 
 
@@ -118,7 +103,7 @@ public class JokesActivity extends AppCompatActivity implements JokesContract.Vi
     @Override
     public void showError() {
         jokeProgress.setVisibility(View.INVISIBLE);
-        Toast.makeText(this, "There is a problem with internet connection :((", Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), "There is a problem with internet connection :((", Toast.LENGTH_LONG).show();
 
     }
 
@@ -133,23 +118,9 @@ public class JokesActivity extends AppCompatActivity implements JokesContract.Vi
         jokeProgress.setVisibility(View.VISIBLE);
     }
 
-    @OnClick(R.id.buttonOnToolbar)
-    public void buttonOnToolbarAction(){
-       Intent intent = new Intent(this, DrawerActivity.class);
-       startActivity(intent);
-    }
 
-    @OnClick(R.id.buttonOnToolbarNotification)
-    public void showJokeNotification () {
-       // createChannel();
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this,
-                NOTIFICATION_CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_menu_black_24dp)
-                .setContentTitle(getString(R.string.notification_title))
-                .setContentText(getString(R.string.notification_message))
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setAutoCancel(true);
+
     }
     /*
     private void createChannel(){
@@ -170,6 +141,6 @@ public class JokesActivity extends AppCompatActivity implements JokesContract.Vi
     }
 */
 
-}
+
 
 

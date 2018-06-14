@@ -1,10 +1,12 @@
-package com.myapp.k.myapp.room;
+package joke.k.myapplication.login.room;
 
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.RoomDatabase;
 
-import com.myapp.k.myapp.dao.JokesDao;
-import com.myapp.k.myapp.data.RandomJokes;
+
+
+import joke.k.myapplication.login.dao.JokesDao;
+import joke.k.myapplication.login.data.RandomJokes;
 
 @Database(entities = {RandomJokes.class},version = 1)
 public abstract class JokesDatabase extends RoomDatabase {
