@@ -103,7 +103,7 @@ public class JokesPresenter implements JokesContract.Presenter, LifecycleObserve
 
     @Override
     public void addJokeToDatabase() {
-        jokesDao.insert(new RandomJokes());
+        jokesDao.insert(randomJokes);
     }
 
     @Override

@@ -14,6 +14,9 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnTouch;
@@ -22,14 +25,10 @@ import joke.k.myapplication.R;
 import joke.k.myapplication.login.JokeApplication;
 import joke.k.myapplication.login.api.Api;
 import joke.k.myapplication.login.data.RandomJokes;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
+
+
 
 public class JokesActivity extends Fragment implements JokesContract.View {
-
-
-
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
@@ -44,11 +43,12 @@ public class JokesActivity extends Fragment implements JokesContract.View {
 
 
     private Api api;
-    private JokesContract.Presenter presenter;
+
     private List<RandomJokes> jokes = new ArrayList<>();
 
 
-
+        @Inject
+        JokesContract.Presenter presenter;
 
 
         @Nullable
@@ -56,20 +56,17 @@ public class JokesActivity extends Fragment implements JokesContract.View {
         public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
             View view = inflater.inflate(R.layout.fragment_jokes, container, false);
             ButterKnife.bind(this, view);
+            ((JokeApplication) getActivity().getApplication()).getAppComponent()
+                    .plus(new JokesModule(this))
+                    .inject(this);
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Api.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create(new Gson()))
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build();
 
-        presenter = new JokesPresenter(this,
-                retrofit.create(Api.class), JokeApplication.getRoom().jokesDao()
-
-        );
 
  return view;
     }
+
+
+
 
     @Override
     public void showData(RandomJokes randomJokes) {
@@ -89,7 +86,8 @@ public class JokesActivity extends Fragment implements JokesContract.View {
     @Override
     public void actionAfterLeftToRightSwap(RandomJokes randomJokes) {
         Toast.makeText(getContext(), "Joke saved to Database", Toast.LENGTH_LONG).show();
-       JokeApplication.getRoom().jokesDao().insert(randomJokes);
+
+       presenter.addJokeToDatabase();
     }
 
 
@@ -119,9 +117,7 @@ public class JokesActivity extends Fragment implements JokesContract.View {
     }
 
 
-
-
-    }
+}
     /*
     private void createChannel(){
         int importance = NotificationManager.IMPORTANCE_DEFAULT;

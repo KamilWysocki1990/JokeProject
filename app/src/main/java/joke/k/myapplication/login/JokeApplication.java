@@ -11,33 +11,32 @@ import joke.k.myapplication.login.room.JokesDatabase;
 
 public class JokeApplication extends Application {
 
-    public static JokesDatabase database;
     private AppComponent appComponent;
+    private static JokesDatabase database;
+
+
+    public static JokesDatabase getRoom() {
+        return database;
+    }
 
     public AppComponent getAppComponent() {
         return appComponent;
     }
 
-    public static JokesDatabase getRoom() {
-        return database;
-    }
+
+
 
     @Override
     public void onCreate() {
         super.onCreate();
 
 
-        // Dagger 2
+
+// Dagger 2
         appComponent = DaggerAppComponent
                 .builder()
                 .appModule(new AppModule(this))
                 .dataModule(new DataModule())
-                .build();
-
-        // Room
-        database = Room.databaseBuilder(this,JokesDatabase.class,JokesDatabase.NAME)
-                .allowMainThreadQueries()
-                .fallbackToDestructiveMigration()
                 .build();
 
 
