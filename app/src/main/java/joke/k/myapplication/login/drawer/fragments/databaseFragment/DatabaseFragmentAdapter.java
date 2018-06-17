@@ -1,5 +1,6 @@
 package joke.k.myapplication.login.drawer.fragments.databaseFragment;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import joke.k.myapplication.R;
 import joke.k.myapplication.login.data.RandomJokes;
+import joke.k.myapplication.login.drawer.fragments.databaseFragment.showSavedJoke.ShowSavedJokeActivity;
 
 public class DatabaseFragmentAdapter extends RecyclerView.Adapter<DatabaseFragmentAdapter.JokeHolder> {
 
@@ -57,9 +59,19 @@ public class DatabaseFragmentAdapter extends RecyclerView.Adapter<DatabaseFragme
     public  JokeHolder (View jokeHolderView ){
         super(jokeHolderView);
         ButterKnife.bind(this,jokeHolderView);
+
+        itemView.setOnClickListener(view ->{
+            Intent intentJoke = new Intent(itemView.getContext(), ShowSavedJokeActivity.class);
+            intentJoke.putExtra(ShowSavedJokeActivity.JOKE_ID_KEY,jokesList.get(getAdapterPosition()).getId());
+            itemView.getContext().startActivity(intentJoke);
+        } );
+
+
+
+
     }
         public void setupJoke(RandomJokes randomJokes) {
-            jokeId.setText("1");
+            jokeId.setText(randomJokes.getSetup());
         }
     }
 

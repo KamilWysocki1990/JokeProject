@@ -9,6 +9,9 @@
     <string name="welcome">Welcome</string>
     <string name="loginButton">Login</string>
     <string name="joke_App">Jokes</string>
+    <string name="see_joke">Jokes</string>
+    <string name="your_database">Your Database</string>
+    <string name="search_via_category">Search via Category</string>
 
 
 </resources>

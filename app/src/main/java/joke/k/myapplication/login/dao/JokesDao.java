@@ -19,4 +19,8 @@ public interface JokesDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(RandomJokes randomJokes);
+
+    @Query("SELECT * FROM RandomJokes WHERE id LIKE :jokeId LIMIT 1")
+    RandomJokes getJokeById(int jokeId);
+
 }
