@@ -7,5 +7,5 @@ import dagger.Subcomponent;
 @Singleton
 @Subcomponent (modules = {JokesModule.class})
 public interface JokesComponent {
-    void inject (JokesActivity jokesActivity);
+    void inject (JokesFragment jokesFragment);
 }

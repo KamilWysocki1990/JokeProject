@@ -1,9 +1,9 @@
-package com.myapp.k.myapp.fragments.databaseFragment;
+package joke.k.myapplication.login.drawer.fragments.databaseFragment;
 
-import com.myapp.k.myapp.data.RandomJokes;
 
 import java.util.List;
-import java.util.Random;
+
+import joke.k.myapplication.login.data.RandomJokes;
 
 public interface DatabaseFragmentContract {
 

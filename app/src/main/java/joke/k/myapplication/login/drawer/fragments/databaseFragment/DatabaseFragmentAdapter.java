@@ -1,4 +1,4 @@
-package com.myapp.k.myapp.fragments.databaseFragment;
+package joke.k.myapplication.login.drawer.fragments.databaseFragment;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -7,14 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.myapp.k.myapp.R;
-import com.myapp.k.myapp.data.RandomJokes;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import joke.k.myapplication.R;
+import joke.k.myapplication.login.data.RandomJokes;
 
 public class DatabaseFragmentAdapter extends RecyclerView.Adapter<DatabaseFragmentAdapter.JokeHolder> {
 

@@ -1,4 +1,4 @@
-package com.myapp.k.myapp.fragments.databaseFragment;
+package joke.k.myapplication.login.drawer.fragments.databaseFragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,14 +10,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.myapp.k.myapp.JokesApplication;
-import com.myapp.k.myapp.R;
-import com.myapp.k.myapp.data.RandomJokes;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import joke.k.myapplication.R;
+import joke.k.myapplication.login.JokeApplication;
+import joke.k.myapplication.login.data.RandomJokes;
 
 
 public class DatabaseFragment extends Fragment implements DatabaseFragmentContract.View  {
@@ -25,18 +27,19 @@ public class DatabaseFragment extends Fragment implements DatabaseFragmentContra
     @BindView(R.id.jokes_recycler)
     RecyclerView jokesRecycler;
 
-    private DatabaseFragmentContract.Presenter presenter;
     private DatabaseFragmentAdapter databaseFragmentAdapter;
-
+    @Inject
+    DatabaseFragmentContract.Presenter presenter;
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_first, container, false);
+        View view = inflater.inflate(R.layout.fragment_database, container, false);
         ButterKnife.bind(this, view);
-
-        presenter = new DatabaseFragmentPresenter(this, JokesApplication.getRoom().jokesDao());
+        ((JokeApplication) getActivity().getApplication()).getAppComponent()
+              .plus(new DatabaseFragmentModule(this))
+               .inject(this);
 
         setupRecycler();
         presenter.getJokesFromRoom();

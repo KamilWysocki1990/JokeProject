@@ -28,7 +28,7 @@ import joke.k.myapplication.login.data.RandomJokes;
 
 
 
-public class JokesActivity extends Fragment implements JokesContract.View {
+public class JokesFragment extends Fragment implements JokesContract.View {
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 

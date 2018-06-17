@@ -14,9 +14,9 @@ import android.view.MenuItem;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import joke.k.myapplication.R;
-import joke.k.myapplication.login.drawer.fragments.SecondFragment;
 import joke.k.myapplication.login.drawer.fragments.ThirdFragment;
-import joke.k.myapplication.login.drawer.fragments.jokeFragment.JokesActivity;
+import joke.k.myapplication.login.drawer.fragments.databaseFragment.DatabaseFragment;
+import joke.k.myapplication.login.drawer.fragments.jokeFragment.JokesFragment;
 
 public class DrawerActivity extends AppCompatActivity{
 
@@ -89,11 +89,11 @@ public class DrawerActivity extends AppCompatActivity{
 
             switch (itemId) {
                 case R.id.item_drawer_first: {
-                    fragmentToAdd = new JokesActivity();
+                    fragmentToAdd = new JokesFragment();
                     break;
                 }
                 case R.id.item_drawer_second: {
-                    fragmentToAdd = new SecondFragment();
+                    fragmentToAdd = new DatabaseFragment();
                     break;
                 }
                 case R.id.item_drawer_third: {
