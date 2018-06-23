@@ -6,6 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".login.drawer.fragments.databaseFragment.showSavedJoke.ShowSavedJokeActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_in_saved_joke"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentTop="true" />
+
+
     <TextView
         android:textSize="25sp"
         android:id="@+id/askJokesFromDatabase"

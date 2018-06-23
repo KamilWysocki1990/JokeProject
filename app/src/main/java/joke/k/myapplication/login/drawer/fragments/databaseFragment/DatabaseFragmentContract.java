@@ -12,7 +12,11 @@ public interface DatabaseFragmentContract {
     }
     interface Presenter{
         void getJokesFromRoom();
+        void deleteJokeFromDatabase(int id);
 
+    }
+    interface JokeDeleteListener{
+        void removeJokeFromDatabase(int id);
 
     }
 }

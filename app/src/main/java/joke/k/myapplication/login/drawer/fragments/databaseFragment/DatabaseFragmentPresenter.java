@@ -19,6 +19,7 @@ public class DatabaseFragmentPresenter implements DatabaseFragmentContract.Prese
         this.jokesDao = jokesDao;
     }
 
+
     private JokesDao jokesDao;
     private List<RandomJokes> jokes = new ArrayList<>();
 
@@ -28,7 +29,10 @@ public class DatabaseFragmentPresenter implements DatabaseFragmentContract.Prese
         view.updateList(jokesDao.getAll());
     }
 
-
+    @Override
+    public void deleteJokeFromDatabase(int id) {
+        jokesDao.delete(jokesDao.getJokeById(id));
+    }
 
 
 }

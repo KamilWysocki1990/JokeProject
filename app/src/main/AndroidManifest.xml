@@ -24,7 +24,9 @@
         <activity
             android:name=".login.drawer.DrawerActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".login.drawer.fragments.databaseFragment.showSavedJoke.ShowSavedJokeActivity"></activity>
+        <activity android:name=".login.drawer.fragments.databaseFragment.showSavedJoke.ShowSavedJokeActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

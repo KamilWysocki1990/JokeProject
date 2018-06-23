@@ -42,6 +42,7 @@ public class JokesFragment extends Fragment implements JokesContract.View {
     ProgressBar jokeProgress;
 
 
+
     private Api api;
 
     private List<RandomJokes> jokes = new ArrayList<>();

@@ -1,6 +1,7 @@
 package joke.k.myapplication.login.dao;
 
 import android.arch.persistence.room.Dao;
+import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
@@ -20,7 +21,12 @@ public interface JokesDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(RandomJokes randomJokes);
 
+    @Delete
+    void delete(RandomJokes randomJokes);
+
     @Query("SELECT * FROM RandomJokes WHERE id LIKE :jokeId LIMIT 1")
     RandomJokes getJokeById(int jokeId);
+
+
 
 }

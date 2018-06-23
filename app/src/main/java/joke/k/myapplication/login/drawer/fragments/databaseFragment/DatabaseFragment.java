@@ -22,7 +22,7 @@ import joke.k.myapplication.login.JokeApplication;
 import joke.k.myapplication.login.data.RandomJokes;
 
 
-public class DatabaseFragment extends Fragment implements DatabaseFragmentContract.View  {
+public class DatabaseFragment extends Fragment implements DatabaseFragmentContract.View, DatabaseFragmentContract.JokeDeleteListener  {
 
     @BindView(R.id.jokes_recycler)
     RecyclerView jokesRecycler;
@@ -54,13 +54,19 @@ public class DatabaseFragment extends Fragment implements DatabaseFragmentContra
        databaseFragmentAdapter.updateJokesList(jokes);
     }
 
+
     private void setupRecycler(){
         jokesRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
-        databaseFragmentAdapter = new DatabaseFragmentAdapter();
+        databaseFragmentAdapter = new DatabaseFragmentAdapter(this);
         jokesRecycler.setAdapter(databaseFragmentAdapter);
 
         RecyclerView.ItemDecoration decoration = new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL);
         jokesRecycler.addItemDecoration(decoration);
+    }
+
+    @Override
+    public void removeJokeFromDatabase(int id) {
+        presenter.deleteJokeFromDatabase(id);
     }
 }
 

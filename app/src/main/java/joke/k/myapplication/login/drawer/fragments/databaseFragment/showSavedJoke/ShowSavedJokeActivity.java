@@ -2,6 +2,8 @@ package joke.k.myapplication.login.drawer.fragments.databaseFragment.showSavedJo
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.TextView;
 
 import javax.inject.Inject;
@@ -14,6 +16,9 @@ import joke.k.myapplication.login.data.RandomJokes;
 
 public class ShowSavedJokeActivity extends AppCompatActivity implements ShowSavedJokeContract.View {
 
+    @BindView(R.id.toolbar_in_saved_joke)
+    Toolbar toolbar;
+
     @BindView(R.id.anserwJokesFromDatabase)
     TextView anserwFromDatabase;
 
@@ -25,6 +30,9 @@ public class ShowSavedJokeActivity extends AppCompatActivity implements ShowSave
 
     public static final String JOKE_ID_KEY = "Joke id";
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +41,10 @@ public class ShowSavedJokeActivity extends AppCompatActivity implements ShowSave
         ((JokeApplication) getApplication()).getAppComponent()
                 .plus(new ShowSavedJokeModule(this))
                 .inject(this);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
+
+
 
 
         presenter.handleJoke(getIntent().getIntExtra(JOKE_ID_KEY,-1));

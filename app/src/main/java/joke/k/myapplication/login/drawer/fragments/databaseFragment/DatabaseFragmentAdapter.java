@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -15,12 +16,22 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import joke.k.myapplication.R;
+import joke.k.myapplication.login.dao.JokesDao;
 import joke.k.myapplication.login.data.RandomJokes;
 import joke.k.myapplication.login.drawer.fragments.databaseFragment.showSavedJoke.ShowSavedJokeActivity;
+import joke.k.myapplication.login.drawer.fragments.jokeFragment.JokesContract;
 
 public class DatabaseFragmentAdapter extends RecyclerView.Adapter<DatabaseFragmentAdapter.JokeHolder> {
 
+
+    DatabaseFragmentContract.JokeDeleteListener jokeDeleteListener;
+
+
     private List<RandomJokes> jokesList = new ArrayList<>();
+
+    public DatabaseFragmentAdapter(DatabaseFragmentContract.JokeDeleteListener jokeDeleteListener){
+        this.jokeDeleteListener = jokeDeleteListener;
+    }
 
     public void updateJokesList(List<RandomJokes> jokes){
         jokesList.clear();
@@ -44,7 +55,7 @@ public class DatabaseFragmentAdapter extends RecyclerView.Adapter<DatabaseFragme
 
     @Override
     public void onBindViewHolder(@NonNull JokeHolder holder, int position) {
-        holder.setupJoke(jokesList.get(position));
+        holder.setupJoke(jokesList.get(position),jokeDeleteListener);
     }
 
     @Override
@@ -53,25 +64,40 @@ public class DatabaseFragmentAdapter extends RecyclerView.Adapter<DatabaseFragme
     }
 
     class JokeHolder extends RecyclerView.ViewHolder{
+
         @BindView(R.id.item_joke_id)
         TextView jokeId;
+
+        @BindView(R.id.item_joke_remove_icon)
+        ImageView removeJokeIcon;
 
     public  JokeHolder (View jokeHolderView ){
         super(jokeHolderView);
         ButterKnife.bind(this,jokeHolderView);
 
+
         itemView.setOnClickListener(view ->{
             Intent intentJoke = new Intent(itemView.getContext(), ShowSavedJokeActivity.class);
             intentJoke.putExtra(ShowSavedJokeActivity.JOKE_ID_KEY,jokesList.get(getAdapterPosition()).getId());
             itemView.getContext().startActivity(intentJoke);
-        } );
+        });
+
+        removeJokeIcon.setOnClickListener(view  ->{
+                jokeDeleteListener.removeJokeFromDatabase(jokesList.get(getAdapterPosition()).getId());
+                jokesList.remove(jokesList.get(getAdapterPosition()));
+
+                notifyItemRemoved(getAdapterPosition());
+
+        });
+
 
 
 
 
     }
-        public void setupJoke(RandomJokes randomJokes) {
+        public void setupJoke(RandomJokes randomJokes,DatabaseFragmentContract.JokeDeleteListener jokeDeleteListener ) {
             jokeId.setText(randomJokes.getSetup());
+
         }
     }
 

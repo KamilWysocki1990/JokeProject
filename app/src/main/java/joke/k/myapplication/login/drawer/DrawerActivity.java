@@ -1,15 +1,21 @@
 package joke.k.myapplication.login.drawer;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -18,7 +24,7 @@ import joke.k.myapplication.login.drawer.fragments.ThirdFragment;
 import joke.k.myapplication.login.drawer.fragments.databaseFragment.DatabaseFragment;
 import joke.k.myapplication.login.drawer.fragments.jokeFragment.JokesFragment;
 
-public class DrawerActivity extends AppCompatActivity{
+public class DrawerActivity extends AppCompatActivity {
 
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
@@ -28,6 +34,8 @@ public class DrawerActivity extends AppCompatActivity{
 
     @BindView(R.id.drawer_toolbar)
     Toolbar toolbar;
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,7 +47,7 @@ public class DrawerActivity extends AppCompatActivity{
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
-            getSupportActionBar().setTitle("Database Option");
+            getSupportActionBar().setTitle("Jokes Application");
         }
 
         navigationView.setNavigationItemSelectedListener(item -> {
@@ -64,10 +72,9 @@ public class DrawerActivity extends AppCompatActivity{
         return super.onOptionsItemSelected(item);
 
 
-
     }
 
-    @Override
+  /*  @Override
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(Gravity.START)) {
             drawerLayout.closeDrawers();
@@ -77,7 +84,7 @@ public class DrawerActivity extends AppCompatActivity{
             finish();
         }
     }
-
+*/
 
 
     private void showFragment(int itemId) {
@@ -114,4 +121,7 @@ public class DrawerActivity extends AppCompatActivity{
             fragmentManager.popBackStackImmediate(fragmentTag, 0);
         }
     }
+
+
 }
+
