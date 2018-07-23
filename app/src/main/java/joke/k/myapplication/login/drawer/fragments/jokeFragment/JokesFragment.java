@@ -1,24 +1,33 @@
 package joke.k.myapplication.login.drawer.fragments.jokeFragment;
 
+
+import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.Toolbar;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
-import com.google.gson.Gson;
+import android.widget.ToggleButton;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.OnTouch;
 import io.reactivex.disposables.CompositeDisposable;
 import joke.k.myapplication.R;
@@ -32,6 +41,8 @@ public class JokesFragment extends Fragment implements JokesContract.View {
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
+    public static final String TIME_PICKER_TAG="timePickerTag";
+
     @BindView(R.id.askJokes)
     TextView textForAskJokes;
 
@@ -41,6 +52,12 @@ public class JokesFragment extends Fragment implements JokesContract.View {
     @BindView(R.id.joke_progress)
     ProgressBar jokeProgress;
 
+    @BindView(R.id.switchButtonNotificationOn)
+    ToggleButton toggleNotificationButtonOn;
+
+    @BindView(R.id.switchButtonNotificationOff)
+    ToggleButton toggleNotificationButtonOff;
+
 
 
     private Api api;
@@ -48,25 +65,21 @@ public class JokesFragment extends Fragment implements JokesContract.View {
     private List<RandomJokes> jokes = new ArrayList<>();
 
 
-        @Inject
-        JokesContract.Presenter presenter;
+    @Inject
+    JokesContract.Presenter presenter;
 
 
-        @Nullable
-        @Override
-        public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-            View view = inflater.inflate(R.layout.fragment_jokes, container, false);
-            ButterKnife.bind(this, view);
-            ((JokeApplication) getActivity().getApplication()).getAppComponent()
-                    .plus(new JokesModule(this))
-                    .inject(this);
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_jokes, container, false);
+        ButterKnife.bind(this, view);
+        ((JokeApplication) getActivity().getApplication()).getAppComponent()
+                .plus(new JokesModule(this))
+                .inject(this);
 
-
-
- return view;
+        return view;
     }
-
-
 
 
     @Override
@@ -88,7 +101,7 @@ public class JokesFragment extends Fragment implements JokesContract.View {
     public void actionAfterLeftToRightSwap(RandomJokes randomJokes) {
         Toast.makeText(getContext(), "Joke saved to Database", Toast.LENGTH_LONG).show();
 
-       presenter.addJokeToDatabase();
+        presenter.addJokeToDatabase();
     }
 
 
@@ -111,6 +124,32 @@ public class JokesFragment extends Fragment implements JokesContract.View {
 
     }
 
+    @OnClick(R.id.switchButtonNotificationOn)
+    public void notificationButtonOn() {
+        toggleNotificationButtonOn.setChecked(true);
+        if (toggleNotificationButtonOn.isChecked()) {
+            toggleNotificationButtonOff.setChecked(false);
+
+        }
+
+        android.support.v4.app.DialogFragment timePickerFragment = new TimePickerFragment();
+        timePickerFragment.show(getActivity().getSupportFragmentManager(),"Time Picker");
+
+
+    }
+
+    @OnClick(R.id.switchButtonNotificationOff)
+    public void notificationButtonOff() {
+        toggleNotificationButtonOff.setChecked(true);
+        if (toggleNotificationButtonOff.isChecked()) {
+            toggleNotificationButtonOn.setChecked(false);
+
+        }
+
+
+
+    }
+
 
     @Override
     public void showProgress() {
@@ -118,25 +157,42 @@ public class JokesFragment extends Fragment implements JokesContract.View {
     }
 
 
-}
-    /*
-    private void createChannel(){
-        int importance = NotificationManager.IMPORTANCE_DEFAULT;
-        NotificationChannel channel = null;
-       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            channel = new NotificationChannel("ChannelId", "Channel", importance);
+
+
+    public static class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener{
+
+        public TimePickerFragment(){}
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the current time as the default values for the picker
+
+            final Calendar c = Calendar.getInstance();
+           int  hour = c.get(Calendar.HOUR_OF_DAY);
+            int minute = c.get(Calendar.MINUTE);
+
+
+            // Create a new instance of TimePickerDialog and return it
+            return new TimePickerDialog(getActivity(),android.R.style.Theme_Holo_Dialog, this, hour, minute, true );
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            channel.setDescription("Reminders");
-        }
-// Register the channel with the notifications manager
-        NotificationManager mNotificationManager =
-                (NotificationManager) getApplication().getSystemService(Context.NOTIFICATION_SERVICE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            mNotificationManager.createNotificationChannel(channel);
+
+        @Override
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+
+            final Calendar c = Calendar.getInstance();
+            hourOfDay = c.get(Calendar.HOUR_OF_DAY);
+            minute = c.get(Calendar.MINUTE);
+
+
         }
     }
-*/
+
+
+
+
+    }
+
+
 
 
 

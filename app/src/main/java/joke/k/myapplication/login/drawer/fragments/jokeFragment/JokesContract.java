@@ -2,7 +2,7 @@ package joke.k.myapplication.login.drawer.fragments.jokeFragment;
 
 
 import android.view.MotionEvent;
-
+import android.widget.CompoundButton;
 
 
 import java.util.List;
@@ -19,6 +19,8 @@ public interface JokesContract {
         void showProgress();
         void showError();
         void updateListOfJoke(List<RandomJokes> jokes);
+        void notificationButtonOn();
+        void notificationButtonOff();
 
 
     }
@@ -31,6 +33,8 @@ public interface JokesContract {
         void onSwapDetected(MotionEvent event);
         void addJokeToDatabase();
         void showJokeNotification();
+        void notificationButtonSetupOn();
+        void notificationButtonSetupOff();
 
 
 

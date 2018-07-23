@@ -5,7 +5,7 @@ import android.arch.lifecycle.LifecycleObserver;
 import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.OnLifecycleEvent;
 import android.view.MotionEvent;
-
+import android.widget.CompoundButton;
 
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -112,4 +112,18 @@ public class JokesPresenter implements JokesContract.Presenter, LifecycleObserve
 
 
     }
+
+    @Override
+    public void notificationButtonSetupOn() {
+    //  view.notificationButtonOn();
+
+    }
+
+    @Override
+    public void notificationButtonSetupOff() {
+     //   view.notificationButtonOff();
+    }
+
+
 }
+
