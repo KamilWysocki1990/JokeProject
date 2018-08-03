@@ -5,19 +5,19 @@
     <item
         android:id="@+id/item_drawer_first"
         android:title="@string/see_joke"
-        android:icon="@drawable/ic_folder_icon_24dp"
+        android:icon="@drawable/ic_sentiment_very_satisfied_black_24dp"
         />
 
     <item
         android:id="@+id/item_drawer_second"
         android:title="@string/your_database"
-        android:icon="@drawable/ic_folder_icon_24dp"
+        android:icon="@drawable/ic_folder_black_24dp"
         />
 
     <item
         android:id="@+id/item_drawer_third"
         android:title="@string/search_via_category"
-        android:icon="@drawable/ic_folder_icon_24dp"/>
+        android:icon="@drawable/ic_search_black_24dp"/>
 
 
 </menu>

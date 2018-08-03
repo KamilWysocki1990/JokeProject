@@ -32,7 +32,7 @@ import butterknife.OnTouch;
 import joke.k.myapplication.R;
 import joke.k.myapplication.login.JokeApplication;
 import joke.k.myapplication.login.data.RandomJokes;
-
+import joke.k.myapplication.login.drawer.fragments.TimePickerFragment;
 
 
 public class JokesFragment extends Fragment implements JokesContract.View {
@@ -128,10 +128,15 @@ public class JokesFragment extends Fragment implements JokesContract.View {
 
         }
 
-      //  android.support.v4.app.DialogFragment timePickerFragment = new JokesPresenter.TimePickerFragment();
-      //  timePickerFragment.show(getActivity().getSupportFragmentManager(),"Time Picker");
+       android.support.v4.app.DialogFragment timePickerFragment = new TimePickerFragment();
+        timePickerFragment.show(getActivity().getSupportFragmentManager(),"Time Picker");
 
 
+    }
+
+    @Override
+    public void passTimeFromTimePicker(int hour, int minute) {
+        presenter.providingTimeFromTimePicker(hour,minute);
     }
 
     @OnClick(R.id.switchButtonNotificationOff)

@@ -14,17 +14,24 @@ import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
 import joke.k.myapplication.R;
 import joke.k.myapplication.login.drawer.fragments.ThirdFragment;
+import joke.k.myapplication.login.drawer.fragments.TimePickerFragment;
 import joke.k.myapplication.login.drawer.fragments.databaseFragment.DatabaseFragment;
 import joke.k.myapplication.login.drawer.fragments.jokeFragment.JokesFragment;
+import joke.k.myapplication.login.drawer.fragments.jokeFragment.JokesPresenter;
 
-public class DrawerActivity extends AppCompatActivity {
+public class DrawerActivity extends AppCompatActivity implements TimePickerFragment.newInterface {
 
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
@@ -35,6 +42,7 @@ public class DrawerActivity extends AppCompatActivity {
     @BindView(R.id.drawer_toolbar)
     Toolbar toolbar;
 
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
 
     @Override
@@ -123,5 +131,32 @@ public class DrawerActivity extends AppCompatActivity {
     }
 
 
-}
+    @Override
+    public void providingTimeFromTimePicker(int hour, int minute) {
+
+            String time = String.valueOf(hour)+":"+String.valueOf(minute);
+            Observable<String> observable = Observable.just(time);
+            compositeDisposable.add(observable
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(
+                            timeToSet -> {
+                                // onNext
+                                timeToSet = time;
+                                Toast.makeText(this, time, Toast.LENGTH_LONG).show();
+                            },
+                            throwable -> {
+                                // onError
+                            },
+                            () -> {
+                                // onCompleted
+                            })
+            );
+
+
+        }
+
+
+    }
+
 

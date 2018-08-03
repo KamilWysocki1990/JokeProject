@@ -6,6 +6,7 @@ import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleObserver;
 import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.OnLifecycleEvent;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.MotionEvent;
@@ -23,7 +24,7 @@ import joke.k.myapplication.login.api.Api;
 import joke.k.myapplication.login.dao.JokesDao;
 import joke.k.myapplication.login.data.RandomJokes;
 
-public class JokesPresenter implements JokesContract.Presenter, LifecycleObserver, JokesContract.TimeToNotification {
+public class JokesPresenter implements JokesContract.Presenter, LifecycleObserver {
     private JokesContract.View view;
     private Api api;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -123,20 +124,7 @@ public class JokesPresenter implements JokesContract.Presenter, LifecycleObserve
     }
 
     @Override
-    public void notificationButtonSetupOn() {
-    //  view.notificationButtonOn();
-
-    }
-
-    @Override
-    public void notificationButtonSetupOff() {
-     //   view.notificationButtonOff();
-    }
-
-
-
-    @Override
-    public void providingTimeFromTimePicker(int hourOfDay, int minute) {
+     public void providingTimeFromTimePicker(int hourOfDay, int minute) {
         String time = String.valueOf(hourOfDay)+":"+String.valueOf(minute);
         Observable<String> observable = Observable.just(time);
         compositeDisposable.add(observable
@@ -158,39 +146,10 @@ public class JokesPresenter implements JokesContract.Presenter, LifecycleObserve
 
 
     }
-/*
-    public static class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener{
-
-
-
-        public  TimePickerFragment(){}
-
-        int hour,minutes;
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            // Use the current time as the default values for the picker
-
-            final Calendar c = Calendar.getInstance();
-            int  hour = c.get(Calendar.HOUR_OF_DAY);
-            int minute = c.get(Calendar.MINUTE);
 
 
 
 
-            // Create a new instance of TimePickerDialog and return it
-            return new TimePickerDialog(getActivity(),android.R.style.Theme_Holo_Dialog, this, hour, minute, true );
-        }
-
-        @Override
-        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-            hour = hourOfDay;
-            minutes = minute;
-        }
-
-    }
-
-*/
 
 }
 

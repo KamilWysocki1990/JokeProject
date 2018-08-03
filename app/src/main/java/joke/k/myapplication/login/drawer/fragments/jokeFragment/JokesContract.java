@@ -22,6 +22,7 @@ public interface JokesContract {
         void notificationButtonOn();
         void notificationButtonOff();
         void showTestToast();
+        void passTimeFromTimePicker(int hour, int minute);
 
 
     }
@@ -34,18 +35,13 @@ public interface JokesContract {
         void onSwapDetected(MotionEvent event);
         void addJokeToDatabase();
         void showJokeNotification();
-        void notificationButtonSetupOn();
-        void notificationButtonSetupOff();
         void providingTimeFromTimePicker(int hour, int minute);
 
 
 
     }
 
-    interface TimeToNotification{
 
-        void providingTimeFromTimePicker(int hour, int minute);
-    }
 
 
 }
