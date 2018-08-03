@@ -21,6 +21,7 @@ public interface JokesContract {
         void updateListOfJoke(List<RandomJokes> jokes);
         void notificationButtonOn();
         void notificationButtonOff();
+        void showTestToast();
 
 
     }
@@ -35,12 +36,16 @@ public interface JokesContract {
         void showJokeNotification();
         void notificationButtonSetupOn();
         void notificationButtonSetupOff();
+        void providingTimeFromTimePicker(int hour, int minute);
 
 
 
     }
 
+    interface TimeToNotification{
 
+        void providingTimeFromTimePicker(int hour, int minute);
+    }
 
 
 }

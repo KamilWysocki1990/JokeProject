@@ -29,17 +29,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnTouch;
-import io.reactivex.disposables.CompositeDisposable;
 import joke.k.myapplication.R;
 import joke.k.myapplication.login.JokeApplication;
-import joke.k.myapplication.login.api.Api;
 import joke.k.myapplication.login.data.RandomJokes;
 
 
 
 public class JokesFragment extends Fragment implements JokesContract.View {
 
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     public static final String TIME_PICKER_TAG="timePickerTag";
 
@@ -60,9 +57,8 @@ public class JokesFragment extends Fragment implements JokesContract.View {
 
 
 
-    private Api api;
 
-    private List<RandomJokes> jokes = new ArrayList<>();
+
 
 
     @Inject
@@ -132,8 +128,8 @@ public class JokesFragment extends Fragment implements JokesContract.View {
 
         }
 
-        android.support.v4.app.DialogFragment timePickerFragment = new TimePickerFragment();
-        timePickerFragment.show(getActivity().getSupportFragmentManager(),"Time Picker");
+      //  android.support.v4.app.DialogFragment timePickerFragment = new JokesPresenter.TimePickerFragment();
+      //  timePickerFragment.show(getActivity().getSupportFragmentManager(),"Time Picker");
 
 
     }
@@ -150,6 +146,11 @@ public class JokesFragment extends Fragment implements JokesContract.View {
 
     }
 
+    @Override
+    public void showTestToast() {
+        Toast.makeText(getContext(), "Working Right !", Toast.LENGTH_LONG).show();
+    }
+
 
     @Override
     public void showProgress() {
@@ -159,38 +160,8 @@ public class JokesFragment extends Fragment implements JokesContract.View {
 
 
 
-    public static class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener{
 
-        public TimePickerFragment(){}
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            // Use the current time as the default values for the picker
-
-            final Calendar c = Calendar.getInstance();
-           int  hour = c.get(Calendar.HOUR_OF_DAY);
-            int minute = c.get(Calendar.MINUTE);
-
-
-            // Create a new instance of TimePickerDialog and return it
-            return new TimePickerDialog(getActivity(),android.R.style.Theme_Holo_Dialog, this, hour, minute, true );
-        }
-
-        @Override
-        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-
-            final Calendar c = Calendar.getInstance();
-            hourOfDay = c.get(Calendar.HOUR_OF_DAY);
-            minute = c.get(Calendar.MINUTE);
-
-
-        }
-    }
-
-
-
-
-    }
+}
 
 
 
