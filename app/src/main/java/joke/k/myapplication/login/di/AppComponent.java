@@ -4,6 +4,8 @@ package joke.k.myapplication.login.di;
 
 import dagger.Component;
 import joke.k.myapplication.login.ApplicationScope;
+import joke.k.myapplication.login.drawer.DrawerComponent;
+import joke.k.myapplication.login.drawer.DrawerModule;
 import joke.k.myapplication.login.drawer.fragments.databaseFragment.DatabaseFragmentComponent;
 import joke.k.myapplication.login.drawer.fragments.databaseFragment.DatabaseFragmentModule;
 import joke.k.myapplication.login.drawer.fragments.databaseFragment.showSavedJoke.ShowSavedJokeComponent;
@@ -22,5 +24,6 @@ public interface AppComponent {
     JokesComponent plus(JokesModule jokesModule);
     DatabaseFragmentComponent plus(DatabaseFragmentModule databaseFragmentModule);
     ShowSavedJokeComponent plus (ShowSavedJokeModule showSavedJokeModule);
+    DrawerComponent plus (DrawerModule drawerModule);
 
 }

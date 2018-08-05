@@ -25,13 +25,14 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import joke.k.myapplication.R;
+import joke.k.myapplication.login.JokeApplication;
 import joke.k.myapplication.login.drawer.fragments.ThirdFragment;
 import joke.k.myapplication.login.drawer.fragments.TimePickerFragment;
 import joke.k.myapplication.login.drawer.fragments.databaseFragment.DatabaseFragment;
 import joke.k.myapplication.login.drawer.fragments.jokeFragment.JokesFragment;
 import joke.k.myapplication.login.drawer.fragments.jokeFragment.JokesPresenter;
 
-public class DrawerActivity extends AppCompatActivity implements TimePickerFragment.newInterface {
+public class DrawerActivity extends AppCompatActivity implements DrawerContract.View ,TimePickerFragment.newInterface {
 
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
@@ -44,13 +45,17 @@ public class DrawerActivity extends AppCompatActivity implements TimePickerFragm
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
+    @Inject
+    DrawerContract.Presenter presenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawer);
         ButterKnife.bind(this);
-
+        ((JokeApplication) getApplication()).getAppComponent()
+                .plus(new DrawerModule(this))
+                .inject(this);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);

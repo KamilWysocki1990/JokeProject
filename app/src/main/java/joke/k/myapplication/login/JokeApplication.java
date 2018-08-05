@@ -26,6 +26,7 @@ public class JokeApplication extends Application {
 
 
 
+
     @Override
     public void onCreate() {
         super.onCreate();
