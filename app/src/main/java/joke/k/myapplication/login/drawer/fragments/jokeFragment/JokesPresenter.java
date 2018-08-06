@@ -23,6 +23,7 @@ import io.reactivex.schedulers.Schedulers;
 import joke.k.myapplication.login.api.Api;
 import joke.k.myapplication.login.dao.JokesDao;
 import joke.k.myapplication.login.data.RandomJokes;
+import joke.k.myapplication.login.drawer.DrawerActivity;
 
 public class JokesPresenter implements JokesContract.Presenter, LifecycleObserver {
     private JokesContract.View view;

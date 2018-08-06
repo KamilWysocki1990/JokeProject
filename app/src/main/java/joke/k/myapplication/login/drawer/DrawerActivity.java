@@ -32,7 +32,7 @@ import joke.k.myapplication.login.drawer.fragments.databaseFragment.DatabaseFrag
 import joke.k.myapplication.login.drawer.fragments.jokeFragment.JokesFragment;
 import joke.k.myapplication.login.drawer.fragments.jokeFragment.JokesPresenter;
 
-public class DrawerActivity extends AppCompatActivity implements DrawerContract.View ,TimePickerFragment.newInterface {
+public class DrawerActivity extends AppCompatActivity implements DrawerContract.View ,TimePickerFragment.TimeSetListenerForParentActivity {
 
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
@@ -43,10 +43,19 @@ public class DrawerActivity extends AppCompatActivity implements DrawerContract.
     @BindView(R.id.drawer_toolbar)
     Toolbar toolbar;
 
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
+    PassingCancelButton passingCancelButton;
 
     @Inject
     DrawerContract.Presenter presenter;
+
+    public interface PassingCancelButton{
+        void cancelButtonClick();
+    }
+
+    public void setOnDataListener(PassingCancelButton passingCancelButtonInterface){
+        passingCancelButton=passingCancelButtonInterface;
+    }
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -87,7 +96,7 @@ public class DrawerActivity extends AppCompatActivity implements DrawerContract.
 
     }
 
-  /*  @Override
+    @Override
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(Gravity.START)) {
             drawerLayout.closeDrawers();
@@ -97,7 +106,7 @@ public class DrawerActivity extends AppCompatActivity implements DrawerContract.
             finish();
         }
     }
-*/
+
 
 
     private void showFragment(int itemId) {
@@ -138,30 +147,22 @@ public class DrawerActivity extends AppCompatActivity implements DrawerContract.
 
     @Override
     public void providingTimeFromTimePicker(int hour, int minute) {
+        presenter.customTimeNotification(hour,minute);
 
-            String time = String.valueOf(hour)+":"+String.valueOf(minute);
-            Observable<String> observable = Observable.just(time);
-            compositeDisposable.add(observable
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(
-                            timeToSet -> {
-                                // onNext
-                                timeToSet = time;
-                                Toast.makeText(this, time, Toast.LENGTH_LONG).show();
-                            },
-                            throwable -> {
-                                // onError
-                            },
-                            () -> {
-                                // onCompleted
-                            })
-            );
 
 
         }
 
-
+    @Override
+    public void cancelSignal() {
+        passingCancelButton.cancelButtonClick();
     }
+
+
+    @Override
+    public void showCustomTime(String time) {
+        Toast.makeText(this,getString(R.string.set_notification_time)+" "+time,Toast.LENGTH_LONG).show();
+    }
+}
 
 

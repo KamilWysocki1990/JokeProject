@@ -1,30 +1,20 @@
 package joke.k.myapplication.login.drawer.fragments.jokeFragment;
 
 
-import android.app.Dialog;
-import android.app.TimePickerDialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.ToggleButton;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-
 import javax.inject.Inject;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -32,10 +22,11 @@ import butterknife.OnTouch;
 import joke.k.myapplication.R;
 import joke.k.myapplication.login.JokeApplication;
 import joke.k.myapplication.login.data.RandomJokes;
+import joke.k.myapplication.login.drawer.DrawerActivity;
 import joke.k.myapplication.login.drawer.fragments.TimePickerFragment;
 
 
-public class JokesFragment extends Fragment implements JokesContract.View {
+public class JokesFragment extends Fragment implements JokesContract.View,DrawerActivity.PassingCancelButton{
 
 
     public static final String TIME_PICKER_TAG="timePickerTag";
@@ -55,25 +46,19 @@ public class JokesFragment extends Fragment implements JokesContract.View {
     @BindView(R.id.switchButtonNotificationOff)
     ToggleButton toggleNotificationButtonOff;
 
-
-
-
-
-
-
     @Inject
     JokesContract.Presenter presenter;
 
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_jokes, container, false);
         ButterKnife.bind(this, view);
         ((JokeApplication) getActivity().getApplication()).getAppComponent()
                 .plus(new JokesModule(this))
                 .inject(this);
-
+        ((DrawerActivity)getActivity()).setOnDataListener(this);
         return view;
     }
 
@@ -111,7 +96,7 @@ public class JokesFragment extends Fragment implements JokesContract.View {
     @Override
     public void showError() {
         jokeProgress.setVisibility(View.INVISIBLE);
-        Toast.makeText(getContext(), "There is a problem with internet connection :((", Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), R.string.ErrorText, Toast.LENGTH_LONG).show();
 
     }
 
@@ -130,9 +115,7 @@ public class JokesFragment extends Fragment implements JokesContract.View {
 
        android.support.v4.app.DialogFragment timePickerFragment = new TimePickerFragment();
         timePickerFragment.show(getActivity().getSupportFragmentManager(),"Time Picker");
-
-
-    }
+   }
 
     @Override
     public void passTimeFromTimePicker(int hour, int minute) {
@@ -141,15 +124,17 @@ public class JokesFragment extends Fragment implements JokesContract.View {
 
     @OnClick(R.id.switchButtonNotificationOff)
     public void notificationButtonOff() {
-        toggleNotificationButtonOff.setChecked(true);
-        if (toggleNotificationButtonOff.isChecked()) {
-            toggleNotificationButtonOn.setChecked(false);
-
-        }
-
-
+       actionButtonOff();
+        Toast.makeText(getContext(),"Notification turned off",Toast.LENGTH_LONG).show();
 
     }
+
+        private void actionButtonOff(){
+            toggleNotificationButtonOff.setChecked(true);
+            if (toggleNotificationButtonOff.isChecked()) {
+                toggleNotificationButtonOn.setChecked(false);
+            }
+        }
 
     @Override
     public void showTestToast() {
@@ -162,10 +147,10 @@ public class JokesFragment extends Fragment implements JokesContract.View {
         jokeProgress.setVisibility(View.VISIBLE);
     }
 
-
-
-
-
+    @Override
+    public void cancelButtonClick() {
+        actionButtonOff();
+    }
 }
 
 
