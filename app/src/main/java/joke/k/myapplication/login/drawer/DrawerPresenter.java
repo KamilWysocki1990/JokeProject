@@ -1,5 +1,7 @@
 package joke.k.myapplication.login.drawer;
 
+import android.support.v4.app.NotificationCompat;
+
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -42,5 +44,12 @@ public class DrawerPresenter implements DrawerContract.Presenter {
             return time;
         }
 
+   // public void createCustomNotification(){
 
-}
+
+
+
+    }
+
+
+
