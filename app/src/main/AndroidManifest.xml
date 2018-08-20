@@ -27,6 +27,8 @@
         <activity android:name=".login.drawer.fragments.databaseFragment.showSavedJoke.ShowSavedJokeActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
+
+        <service android:name=".login.drawer.NotificationAlarmService" />
     </application>
 
 </manifest>

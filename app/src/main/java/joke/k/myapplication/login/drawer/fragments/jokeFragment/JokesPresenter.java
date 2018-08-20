@@ -45,7 +45,6 @@ public class JokesPresenter implements JokesContract.Presenter, LifecycleObserve
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     private void onCreate() {
         getDataFromApi();
-
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)

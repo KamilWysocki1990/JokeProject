@@ -18,6 +18,7 @@ public interface JokesDao {
     @Query("SELECT * FROM RandomJokes")
     List<RandomJokes> getAll();
 
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(RandomJokes randomJokes);
 

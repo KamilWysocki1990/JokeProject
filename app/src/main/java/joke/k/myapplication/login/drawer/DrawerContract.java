@@ -6,6 +6,7 @@ public interface DrawerContract {
     interface View{
 
             void showCustomTime(String time);
+            void createCustomNotification(int hour, int minute);
     }
 
     interface Presenter {

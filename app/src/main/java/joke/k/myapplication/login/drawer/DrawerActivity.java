@@ -1,18 +1,15 @@
 package joke.k.myapplication.login.drawer;
 
-import android.content.Intent;
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -20,10 +17,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.schedulers.Schedulers;
+
 import joke.k.myapplication.R;
 import joke.k.myapplication.login.JokeApplication;
 import joke.k.myapplication.login.drawer.fragments.ThirdFragment;
@@ -32,7 +26,13 @@ import joke.k.myapplication.login.drawer.fragments.databaseFragment.DatabaseFrag
 import joke.k.myapplication.login.drawer.fragments.jokeFragment.JokesFragment;
 import joke.k.myapplication.login.drawer.fragments.jokeFragment.JokesPresenter;
 
+import static joke.k.myapplication.login.drawer.NotificationAlarmService.CHANNEL_ID;
+
 public class DrawerActivity extends AppCompatActivity implements DrawerContract.View ,TimePickerFragment.TimeSetListenerForParentActivity {
+
+    int hourMilis;
+    int minuteMilis;
+
 
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
@@ -163,6 +163,20 @@ public class DrawerActivity extends AppCompatActivity implements DrawerContract.
     public void showCustomTime(String time) {
         Toast.makeText(this,getString(R.string.set_notification_time)+" "+time,Toast.LENGTH_LONG).show();
     }
+
+
+
+
+
+
+    @Override
+    public void createCustomNotification(int hour, int minute) {
+    AlarmScheduler.scheduleAlarm(this,hour,minute);
+    }
+
+
+
+
 }
 
 
