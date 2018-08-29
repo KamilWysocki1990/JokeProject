@@ -10,6 +10,7 @@ import dagger.Provides;
 import joke.k.myapplication.login.ApplicationScope;
 import joke.k.myapplication.login.api.Api;
 import joke.k.myapplication.login.dao.JokesDao;
+import joke.k.myapplication.login.data.PrefsManager;
 import joke.k.myapplication.login.room.JokesDatabase;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -27,6 +28,14 @@ public class DataModule {
                 .fallbackToDestructiveMigration()
                 .build();
     }
+
+    @Provides
+    @ApplicationScope
+    PrefsManager providePrefsManager(Context context) {
+        return new PrefsManager(context);
+    }
+
+
 
 
     @Provides

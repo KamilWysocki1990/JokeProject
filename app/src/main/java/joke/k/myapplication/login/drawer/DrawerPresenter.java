@@ -10,15 +10,17 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import joke.k.myapplication.R;
+import joke.k.myapplication.login.data.PrefsManager;
 
 public class DrawerPresenter implements DrawerContract.Presenter {
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
-
+    private PrefsManager prefsManager;
     private DrawerContract.View view;
 
-    public DrawerPresenter(DrawerContract.View view) {
+    public DrawerPresenter(DrawerContract.View view, PrefsManager prefsManager) {
         this.view = view;
+        this.prefsManager = prefsManager;
     }
 
     @Override

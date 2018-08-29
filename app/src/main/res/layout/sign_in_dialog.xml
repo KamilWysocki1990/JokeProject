@@ -6,21 +6,28 @@
     android:orientation="vertical">
 
     <EditText
-        android:id="@+id/editTextLogin"
+        android:id="@+id/editTextLoginSignIn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Login"
         android:inputType="text" />
 
     <EditText
-        android:id="@+id/editTextPassword"
+        android:id="@+id/editTextPasswordSignIn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:hint="Password"/>
 
     <EditText
-        android:id="@+id/editTextCity"
+        android:id="@+id/editTextPasswordConfirmationSignIn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:hint="Repeat Password"/>
+
+    <EditText
+        android:id="@+id/editTextCitySignIn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="text"

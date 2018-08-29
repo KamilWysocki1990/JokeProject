@@ -3,7 +3,7 @@
     <string name="sign_in">Sign In</string>
     <string name="password">Password</string>
     <string name="email">Email</string>
-    <string name="login_error_email">Email should have at least 5 characters</string>
+    <string name="login_error_email">Login should have at least 5 characters</string>
     <string name="login_error_password">Password should have at least 5 characters</string>
     <string name="login_success">Successful log-in</string>
     <string name="welcome">Welcome</string>
@@ -17,6 +17,7 @@
     <string name="ErrorText">There is a problem with internet connection :((</string>
     <string name="channel_name">joke_notification</string>
     <string name="channel_description">channel_for_joke_notification</string>
+    <string name="sign_me_text_button">Sign me In!</string>
 
 
 </resources>

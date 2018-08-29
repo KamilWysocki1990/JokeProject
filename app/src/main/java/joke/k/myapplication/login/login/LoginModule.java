@@ -4,6 +4,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import joke.k.myapplication.login.data.PrefsManager;
 
 @Module
 public class LoginModule {
@@ -14,10 +15,12 @@ public class LoginModule {
         this.view = view;
     }
 
+
+
    @Provides
    @Singleton
-    LoginContract.Presenter provideLoginPresenter(){
-        return new LoginPresenter( view);
+    LoginContract.Presenter provideLoginPresenter(PrefsManager prefsManager){
+        return new LoginPresenter( view,prefsManager);
    }
 
 }
