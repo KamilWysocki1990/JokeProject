@@ -6,12 +6,14 @@ import android.webkit.WebViewClient;
 
 public class WebClient {
 
-    public void callWebClient(WebView webView, String url){
+    public WebClient callWebClient(WebView webView, String url){
         webView.setWebViewClient(new WebViewClient());
         webView.getSettings().setLoadsImagesAutomatically(true);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
         webView.loadUrl(url);
+
+        return new WebClient();
     }
 
 

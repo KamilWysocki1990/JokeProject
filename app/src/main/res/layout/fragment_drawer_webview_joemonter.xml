@@ -7,7 +7,7 @@
 
 
     <WebView
-        android:id="@+id/wv9gag"
+        android:id="@+id/wvJoeMonster"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

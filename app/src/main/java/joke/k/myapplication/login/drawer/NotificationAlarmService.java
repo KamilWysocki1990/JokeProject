@@ -20,6 +20,10 @@ import joke.k.myapplication.R;
 
 public class NotificationAlarmService extends IntentService {
 
+    private  String askJokeNotification = "randomAskJoke";
+    private  String askBodyNotification = "randomBodyJoke";
+
+
     public static final String CHANNEL_ID = "JokeID";
     public static final String NOTIFICATION_CHANNEL_ID = "Channel Joke ID";
     public static final String NOTIFICATION_CHANNEL_NAME = "Channel";
@@ -46,7 +50,7 @@ public class NotificationAlarmService extends IntentService {
        final NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this,NOTIFICATION_CHANNEL_ID)
                     .setSmallIcon(R.drawable.ic_mood_black_24dp)
                     .setContentTitle("Smile Remider !")
-                    .setContentText("Much longer text that cannot fit one line...")
+                    .setContentText(askJokeNotification+"\n"+askBodyNotification)
                     .setStyle(new NotificationCompat.BigTextStyle()
                             .bigText("Much longer text that cannot fit one line..."))
                     .setPriority(NotificationCompat.PRIORITY_DEFAULT)
@@ -78,6 +82,7 @@ public class NotificationAlarmService extends IntentService {
         return PendingIntent.getService(context, 0, action, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
-    }
+
+}
 
 

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-
+<group>
     <item
-        android:id="@+id/item_drawer_first"
+        android:id="@+id/item_drawer_joke_fragment"
         android:title="@string/see_joke"
         android:icon="@drawable/ic_sentiment_very_satisfied_black_24dp"
         />
 
     <item
-        android:id="@+id/item_drawer_second"
+        android:id="@+id/item_drawer_database"
         android:title="@string/your_database"
         android:icon="@drawable/ic_folder_black_24dp"
         />
@@ -18,6 +18,29 @@
         android:id="@+id/item_drawer_third"
         android:title="@string/search_via_category"
         android:icon="@drawable/ic_search_black_24dp"/>
+</group>
+
+    <item
+        android:title="@string/sub_item_string">
+    <menu>
+        <item
+            android:id="@+id/item_drawer_webview1"
+            android:title="@string/_9gag"
+            android:icon="@drawable/ninegag_icon"/>
+
+        <item
+            android:id="@+id/item_drawer_webview_joemonster"
+            android:title="@string/joemonster"
+            android:icon="@drawable/joemonster_icon"/>
+
+
+    </menu>
+    </item>
 
 
 </menu>
+
+
+
+
+

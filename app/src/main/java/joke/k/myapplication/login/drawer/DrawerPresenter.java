@@ -2,6 +2,7 @@ package joke.k.myapplication.login.drawer;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.Context;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 
@@ -45,6 +46,18 @@ public class DrawerPresenter implements DrawerContract.Presenter {
                         })
         );
     }
+
+    @Override
+    public void validateFirstLogIn(Context context) {
+       String isFirstLogIn = prefsManager.validateFirstLogIn(context,prefsManager.getCurrentUserName());
+       if(isFirstLogIn.contentEquals("Yes")){
+           prefsManager.setFirstLogIn("No");
+           prefsManager.changeFirstLogIn(context);
+           view.shouldDialogBeDisplayed();
+
+       }
+    }
+
 
     private String timeInString(int hour, int minute) {
         String time = String.valueOf(hour) + ":" + String.valueOf(minute);

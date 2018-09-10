@@ -23,6 +23,7 @@ public interface JokesContract {
         void notificationButtonOff();
         void showTestToast();
         void passTimeFromTimePicker(int hour, int minute);
+        void passJoke(String askJoke, String bodyJoke);
 
 
     }
@@ -34,7 +35,7 @@ public interface JokesContract {
         void getDataFromApi();
         void onSwapDetected(MotionEvent event);
         void addJokeToDatabase();
-        void showJokeNotification();
+        void sendJokeNotification();
         void providingTimeFromTimePicker(int hour, int minute);
 
 

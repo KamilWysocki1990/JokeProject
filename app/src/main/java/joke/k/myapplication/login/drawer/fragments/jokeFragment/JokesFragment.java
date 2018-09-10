@@ -31,6 +31,8 @@ public class JokesFragment extends Fragment implements JokesContract.View,Drawer
 
 
     public static final String TIME_PICKER_TAG="timePickerTag";
+    private String notificationAskJoke = "askJokeToSend";
+    private String notificationBodyJoke = "bodyJokeAsk";
 
     @BindView(R.id.askJokes)
     TextView textForAskJokes;
@@ -60,6 +62,7 @@ public class JokesFragment extends Fragment implements JokesContract.View,Drawer
                 .plus(new JokesModule(this))
                 .inject(this);
         ((DrawerActivity)getActivity()).setOnDataListener(this);
+
         return view;
     }
 
@@ -108,6 +111,7 @@ public class JokesFragment extends Fragment implements JokesContract.View,Drawer
 
     @OnClick(R.id.switchButtonNotificationOn)
     public void notificationButtonOn() {
+        presenter.sendJokeNotification();
         toggleNotificationButtonOn.setChecked(true);
         if (toggleNotificationButtonOn.isChecked()) {
             toggleNotificationButtonOff.setChecked(false);
@@ -121,6 +125,12 @@ public class JokesFragment extends Fragment implements JokesContract.View,Drawer
     @Override
     public void passTimeFromTimePicker(int hour, int minute) {
         presenter.providingTimeFromTimePicker(hour,minute);
+    }
+
+    @Override
+    public void passJoke(String askJoke, String bodyJoke) {
+    notificationAskJoke = askJoke;
+    notificationBodyJoke = bodyJoke;
     }
 
     @OnClick(R.id.switchButtonNotificationOff)
@@ -152,6 +162,7 @@ public class JokesFragment extends Fragment implements JokesContract.View,Drawer
     public void cancelButtonClick() {
         actionButtonOff();
     }
+
 
 
 }

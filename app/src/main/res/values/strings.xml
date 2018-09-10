@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">JokeApp</string>
+    <string name="app_name">FunApp</string>
     <string name="sign_in">Sign In</string>
     <string name="password">Password</string>
     <string name="email">Email</string>
@@ -18,6 +18,11 @@
     <string name="channel_name">joke_notification</string>
     <string name="channel_description">channel_for_joke_notification</string>
     <string name="sign_me_text_button">Sign me In!</string>
+    <string name="_9gag">9GAG</string>
+    <string name="sub_item_string">U may also like...</string>
+    <string name="text_in_nav_head">Fun App to</string>
+    <string name="text_below_nav_head">Make you smile ! :)</string>
+    <string name="joemonster">JoeMonster</string>
 
 
 </resources>

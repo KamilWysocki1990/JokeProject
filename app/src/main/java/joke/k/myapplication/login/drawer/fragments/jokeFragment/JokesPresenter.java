@@ -14,6 +14,7 @@ import android.widget.CompoundButton;
 import android.widget.TimePicker;
 
 
+import java.lang.ref.PhantomReference;
 import java.util.Calendar;
 
 import io.reactivex.Observable;
@@ -22,6 +23,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import joke.k.myapplication.login.api.Api;
 import joke.k.myapplication.login.dao.JokesDao;
+import joke.k.myapplication.login.data.PrefsManager;
 import joke.k.myapplication.login.data.RandomJokes;
 import joke.k.myapplication.login.drawer.DrawerActivity;
 
@@ -31,14 +33,16 @@ public class JokesPresenter implements JokesContract.Presenter, LifecycleObserve
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private RandomJokes randomJokes;
     private JokesDao jokesDao;
+    private PrefsManager prefsManager;
     private float x2, x1;
+
   //  private int hour,minute;
 
-    public JokesPresenter(JokesContract.View view, Api api, JokesDao jokesDao) {
+    public JokesPresenter(JokesContract.View view, Api api, JokesDao jokesDao, PrefsManager prefsManager) {
         this.view = view;
         this.api = api;
         this.jokesDao = jokesDao;
-
+        this.prefsManager = prefsManager;
         ((LifecycleOwner) this.view).getLifecycle().addObserver(this);
     }
 
@@ -113,14 +117,34 @@ public class JokesPresenter implements JokesContract.Presenter, LifecycleObserve
 
     @Override
     public void addJokeToDatabase() {
+        randomJokes.setAccountName(prefsManager.getLoginName());
         jokesDao.insert(randomJokes);
     }
 
     @Override
-    public void showJokeNotification() {
+    public void sendJokeNotification() {
+        {
+            view.showProgress();
+            compositeDisposable.add(api.getJokes()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(
+                            randomJokes -> {
+                                // onNext
+                                this.randomJokes = randomJokes;
 
+                                view.passJoke(randomJokes.getSetup(),randomJokes.getPunchline());
+                            },
+                            throwable -> {
+                                // onError
+                                view.showError();
+                            },
+                            () -> {
+                                // onCompleted
+                            })
+            );
 
-
+        }
     }
 
     @Override

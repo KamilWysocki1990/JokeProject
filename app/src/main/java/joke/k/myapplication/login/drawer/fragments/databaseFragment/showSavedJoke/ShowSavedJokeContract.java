@@ -4,12 +4,13 @@ import joke.k.myapplication.login.data.RandomJokes;
 
 public interface ShowSavedJokeContract {
 
- public interface View{
+ interface View{
 
      void sendJokeFromDatabase(RandomJokes jokeById);
+
     }
 
-    public interface Presenter{
+    interface Presenter{
 
         void handleJoke(int jokeId);
     }

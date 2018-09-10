@@ -6,6 +6,8 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import joke.k.myapplication.login.dao.JokesDao;
+import joke.k.myapplication.login.data.PrefsManager;
+
 @Module
 public class DatabaseFragmentModule {
     DatabaseFragmentContract.View view;
@@ -17,8 +19,8 @@ public class DatabaseFragmentModule {
 
     @Provides
     @Singleton
-    DatabaseFragmentContract.Presenter provideDatabaseFragmentPresenter(JokesDao jokesDao){
-        return new DatabaseFragmentPresenter(view,jokesDao){
+    DatabaseFragmentContract.Presenter provideDatabaseFragmentPresenter(JokesDao jokesDao, PrefsManager prefsManager){
+        return new DatabaseFragmentPresenter(view,jokesDao, prefsManager){
 
         };
     }

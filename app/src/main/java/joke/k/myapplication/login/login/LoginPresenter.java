@@ -16,11 +16,12 @@ private PrefsManager prefsManager;
     }
 
     @Override
-    public boolean sendDataToCheck(String login, String Password, Context context) {
+    public boolean sendDataToCheck(String login, String password, Context context) {
         boolean isCorrect;
         String passwordFromData= prefsManager.getPasswordByLogin(login, context);
-        if (passwordFromData.contentEquals(Password)){
+        if (passwordFromData.contentEquals(password)){
             isCorrect = true;
+            prefsManager.setCurrentUserName(login);
         } else if(passwordFromData.contentEquals("INC")){
             view.errorLoginFromSavedData();
             isCorrect = false;
@@ -62,6 +63,7 @@ private PrefsManager prefsManager;
         if(isSignInInformationPassable){
 
                 prefsManager.saveSignInInformation(login, password, city);
+                prefsManager.setCurrentUserName(login);
                 view.sendConfirmRespondForSignIn();
             }
         }

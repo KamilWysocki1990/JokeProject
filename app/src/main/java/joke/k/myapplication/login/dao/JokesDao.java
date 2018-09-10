@@ -28,6 +28,6 @@ public interface JokesDao {
     @Query("SELECT * FROM RandomJokes WHERE id LIKE :jokeId LIMIT 1")
     RandomJokes getJokeById(int jokeId);
 
-
-
+   @Query("SELECT *FROM RandomJokes WHERE accountName LIKE:account LIMIT 1000")
+    List<RandomJokes> getJokeByAccount(String account);
 }

@@ -21,11 +21,23 @@ public class RandomJokes {
         this.punchline = punchline;
     }
 
+
     @PrimaryKey()
    private int id;
    private String type;
    private String setup;
    private String punchline;
+    private String accountName;
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
+    }
+
+    public String getAccountName() {
+
+        return accountName;
+    }
+
+
 
     public int getId() {
         return id;
@@ -42,6 +54,9 @@ public class RandomJokes {
     public String getPunchline() {
         return punchline;
     }
+
+
+
 
 
 }
