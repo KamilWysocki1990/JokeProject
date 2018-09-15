@@ -16,10 +16,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import joke.k.myapplication.R;
-import joke.k.myapplication.login.dao.JokesDao;
+import joke.k.myapplication.login.data.dao.JokesDao;
 import joke.k.myapplication.login.data.RandomJokes;
 import joke.k.myapplication.login.drawer.fragments.databaseFragment.showSavedJoke.ShowSavedJokeActivity;
-import joke.k.myapplication.login.drawer.fragments.jokeFragment.JokesContract;
 
 public class DatabaseFragmentAdapter extends RecyclerView.Adapter<DatabaseFragmentAdapter.JokeHolder> {
 

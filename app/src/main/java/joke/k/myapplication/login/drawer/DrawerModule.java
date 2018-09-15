@@ -4,7 +4,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import joke.k.myapplication.login.data.PrefsManager;
+import joke.k.myapplication.login.data.prefs.PrefsManager;
 
 @Module
 public class DrawerModule {

@@ -4,10 +4,8 @@ package joke.k.myapplication.login.drawer.fragments.databaseFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-
-import joke.k.myapplication.login.dao.JokesDao;
-import joke.k.myapplication.login.data.PrefsManager;
+import joke.k.myapplication.login.data.dao.JokesDao;
+import joke.k.myapplication.login.data.prefs.PrefsManager;
 import joke.k.myapplication.login.data.RandomJokes;
 
 public class DatabaseFragmentPresenter implements DatabaseFragmentContract.Presenter {

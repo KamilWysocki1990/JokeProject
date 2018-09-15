@@ -3,22 +3,28 @@ package joke.k.myapplication.login.login;
 import android.content.Context;
 
 import joke.k.myapplication.R;
-import joke.k.myapplication.login.data.PrefsManager;
+import joke.k.myapplication.login.data.AppDataManager;
+import joke.k.myapplication.login.data.DataManager;
+import joke.k.myapplication.login.data.prefs.PrefsManager;
 
 public class LoginPresenter implements LoginContract.Presenter {
     private LoginContract.View view;
 private PrefsManager prefsManager;
+private DataManager dataManager;
 
 
-    public LoginPresenter(LoginContract.View view, PrefsManager prefsManager) {
+    public LoginPresenter(LoginContract.View view, PrefsManager prefsManager, DataManager dataManager) {
         this.view = view;
         this.prefsManager=prefsManager;
+        this.dataManager=dataManager;
     }
+
+
 
     @Override
     public boolean sendDataToCheck(String login, String password, Context context) {
         boolean isCorrect;
-        String passwordFromData= prefsManager.getPasswordByLogin(login, context);
+           String passwordFromData=dataManager.getPasswordByLoginn(login,context);
         if (passwordFromData.contentEquals(password)){
             isCorrect = true;
             prefsManager.setCurrentUserName(login);

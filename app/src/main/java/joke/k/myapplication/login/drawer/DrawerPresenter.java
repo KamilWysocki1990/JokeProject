@@ -1,17 +1,12 @@
 package joke.k.myapplication.login.drawer;
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.content.Context;
-import android.os.Build;
-import android.support.v4.app.NotificationCompat;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
-import joke.k.myapplication.R;
-import joke.k.myapplication.login.data.PrefsManager;
+import joke.k.myapplication.login.data.prefs.PrefsManager;
 
 public class DrawerPresenter implements DrawerContract.Presenter {
 

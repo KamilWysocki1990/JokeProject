@@ -1,4 +1,8 @@
 package joke.k.myapplication.login.data;
 
-public interface DataManager {
+import joke.k.myapplication.login.data.prefs.PrefsManagerInterface;
+
+public interface DataManager extends PrefsManagerInterface{
+
+    public void sendDataToSave();
 }

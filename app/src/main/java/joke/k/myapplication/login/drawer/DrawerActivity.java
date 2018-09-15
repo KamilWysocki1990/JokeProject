@@ -24,7 +24,6 @@ import butterknife.ButterKnife;
 
 import joke.k.myapplication.R;
 import joke.k.myapplication.login.JokeApplication;
-import joke.k.myapplication.login.data.PrefsManager;
 import joke.k.myapplication.login.drawer.fragments.webview.FirstWebview;
 import joke.k.myapplication.login.drawer.fragments.webview.ThirdFragment;
 import joke.k.myapplication.login.drawer.fragments.TimePickerFragment;

@@ -1,4 +1,8 @@
 package joke.k.myapplication.login.data.prefs;
 
-public class PrefsManagerInterface {
+import android.content.Context;
+
+public interface PrefsManagerInterface {
+
+    String getPasswordByLoginn(String login,Context context);
 }

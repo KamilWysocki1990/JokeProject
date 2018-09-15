@@ -8,9 +8,10 @@ import com.google.gson.Gson;
 import dagger.Module;
 import dagger.Provides;
 import joke.k.myapplication.login.ApplicationScope;
-import joke.k.myapplication.login.api.Api;
-import joke.k.myapplication.login.dao.JokesDao;
-import joke.k.myapplication.login.data.PrefsManager;
+import joke.k.myapplication.login.data.AppDataManager;
+import joke.k.myapplication.login.data.network.Api;
+import joke.k.myapplication.login.data.dao.JokesDao;
+import joke.k.myapplication.login.data.prefs.PrefsManager;
 import joke.k.myapplication.login.room.JokesDatabase;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -34,6 +35,7 @@ public class DataModule {
     PrefsManager providePrefsManager(Context context) {
         return new PrefsManager(context);
     }
+
 
 
 

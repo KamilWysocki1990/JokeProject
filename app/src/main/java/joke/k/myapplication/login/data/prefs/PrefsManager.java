@@ -4,7 +4,11 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Base64;
 
-public class PrefsManager {
+import javax.inject.Inject;
+
+import joke.k.myapplication.login.ApplicationScope;
+
+public class PrefsManager implements PrefsManagerInterface {
 
 
     public void setFirstLogIn(String firstLogIn) {
@@ -143,6 +147,26 @@ public class PrefsManager {
 
 
     }
+
+    @Override
+    public String getPasswordByLoginn(String login, Context context) {
+        String password;
+        String passwordFromData="0";
+
+        sharedPreferences = context.getApplicationContext().getSharedPreferences(login, Context.MODE_PRIVATE);
+        String dataByLogin = sharedPreferences.getString(login, "0");
+        if(!dataByLogin.contentEquals("0"))
+            passwordFromData = getDataFromLogin(dataByLogin);
+        if (passwordFromData.contentEquals("0")) {
+            password = "INC";
+        } else {
+            password = passwordFromData;
+        }
+
+        return password;
+    }
+
+
 }
 
 

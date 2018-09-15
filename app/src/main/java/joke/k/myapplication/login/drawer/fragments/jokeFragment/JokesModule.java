@@ -4,11 +4,9 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import joke.k.myapplication.login.api.Api;
-import joke.k.myapplication.login.dao.JokesDao;
-import joke.k.myapplication.login.data.PrefsManager;
-import joke.k.myapplication.login.login.LoginContract;
-import joke.k.myapplication.login.login.LoginPresenter;
+import joke.k.myapplication.login.data.network.Api;
+import joke.k.myapplication.login.data.dao.JokesDao;
+import joke.k.myapplication.login.data.prefs.PrefsManager;
 
 @Module
 public class JokesModule {

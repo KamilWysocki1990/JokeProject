@@ -1,6 +1,6 @@
 package joke.k.myapplication.login.drawer.fragments.databaseFragment.showSavedJoke;
 
-import joke.k.myapplication.login.dao.JokesDao;
+import joke.k.myapplication.login.data.dao.JokesDao;
 import joke.k.myapplication.login.data.RandomJokes;
 
 public class ShowSavedJokePresenter implements ShowSavedJokeContract.Presenter {

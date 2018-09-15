@@ -1,31 +1,20 @@
 package joke.k.myapplication.login.drawer.fragments.jokeFragment;
 
-import android.app.Dialog;
-import android.app.TimePickerDialog;
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleObserver;
 import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.OnLifecycleEvent;
-import android.content.Context;
-import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.view.MotionEvent;
-import android.widget.CompoundButton;
-import android.widget.TimePicker;
 
-
-import java.lang.ref.PhantomReference;
-import java.util.Calendar;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
-import joke.k.myapplication.login.api.Api;
-import joke.k.myapplication.login.dao.JokesDao;
-import joke.k.myapplication.login.data.PrefsManager;
+import joke.k.myapplication.login.data.network.Api;
+import joke.k.myapplication.login.data.dao.JokesDao;
+import joke.k.myapplication.login.data.prefs.PrefsManager;
 import joke.k.myapplication.login.data.RandomJokes;
-import joke.k.myapplication.login.drawer.DrawerActivity;
 
 public class JokesPresenter implements JokesContract.Presenter, LifecycleObserver {
     private JokesContract.View view;

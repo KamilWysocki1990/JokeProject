@@ -4,9 +4,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import joke.k.myapplication.login.dao.JokesDao;
-import joke.k.myapplication.login.drawer.fragments.databaseFragment.DatabaseFragmentContract;
-import joke.k.myapplication.login.drawer.fragments.databaseFragment.DatabaseFragmentPresenter;
+import joke.k.myapplication.login.data.dao.JokesDao;
 
 @Module
 public class ShowSavedJokeModule {

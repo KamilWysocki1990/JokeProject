@@ -5,7 +5,7 @@ import android.arch.persistence.room.RoomDatabase;
 
 
 
-import joke.k.myapplication.login.dao.JokesDao;
+import joke.k.myapplication.login.data.dao.JokesDao;
 import joke.k.myapplication.login.data.RandomJokes;
 
 @Database(entities = {RandomJokes.class},version = 1)
