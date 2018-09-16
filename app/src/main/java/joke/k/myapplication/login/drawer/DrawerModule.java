@@ -4,6 +4,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import joke.k.myapplication.login.data.DataManager;
 import joke.k.myapplication.login.data.prefs.PrefsManager;
 
 @Module
@@ -17,8 +18,8 @@ public class DrawerModule {
 
     @Provides
     @Singleton
-    DrawerContract.Presenter provideDrawerPresenter (PrefsManager prefsManager){
-     return new DrawerPresenter(view,prefsManager);
+    DrawerContract.Presenter provideDrawerPresenter (DataManager dataManager){
+     return new DrawerPresenter(view,dataManager);
 
     }
 }

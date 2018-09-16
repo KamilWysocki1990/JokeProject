@@ -6,17 +6,18 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
+import joke.k.myapplication.login.data.DataManager;
 import joke.k.myapplication.login.data.prefs.PrefsManager;
 
 public class DrawerPresenter implements DrawerContract.Presenter {
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
-    private PrefsManager prefsManager;
+    private DataManager dataManager;
     private DrawerContract.View view;
 
-    public DrawerPresenter(DrawerContract.View view, PrefsManager prefsManager) {
+    public DrawerPresenter(DrawerContract.View view, DataManager dataManager) {
         this.view = view;
-        this.prefsManager = prefsManager;
+        this.dataManager = dataManager;
     }
 
     @Override
@@ -44,10 +45,16 @@ public class DrawerPresenter implements DrawerContract.Presenter {
 
     @Override
     public void validateFirstLogIn(Context context) {
-       String isFirstLogIn = prefsManager.validateFirstLogIn(context,prefsManager.getCurrentUserName());
+       // String isFirstLogIn = prefsManager.validateFirstLogIn(context,prefsManager.getCurrentUserName());
+       String isFirstLogIn = dataManager.validateFirstLogInn(context,dataManager.getCurrentUserNamee());
        if(isFirstLogIn.contentEquals("Yes")){
-           prefsManager.setFirstLogIn("No");
-           prefsManager.changeFirstLogIn(context);
+
+         //  prefsManager.setFirstLogIn("No");
+           dataManager.setFirstLogInn("No");
+
+           //prefsManager.changeFirstLogIn(context);
+           dataManager.changeFirstLogInn(context);
+
            view.shouldDialogBeDisplayed();
 
        }

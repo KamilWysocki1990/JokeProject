@@ -152,7 +152,7 @@ public class PrefsManager implements PrefsManagerInterface {
     public String getPasswordByLoginn(String login, Context context) {
         String password;
         String passwordFromData="0";
-
+/// TODO: 16.09.2018 move logic to loginPresenter from prefs
         sharedPreferences = context.getApplicationContext().getSharedPreferences(login, Context.MODE_PRIVATE);
         String dataByLogin = sharedPreferences.getString(login, "0");
         if(!dataByLogin.contentEquals("0"))
@@ -164,6 +164,72 @@ public class PrefsManager implements PrefsManagerInterface {
         }
 
         return password;
+    }
+
+    @Override
+    public void setCurrentUserNamee(String login) {
+        currentUserName = login;
+    }
+
+    @Override
+    public void saveSignInInformationn(String login, String password, String city) {
+        sharedPreferences
+                .edit()
+                .putString(login, attachDataToLogin(password, city))
+                .apply();
+    }
+
+    @Override
+    public boolean validateCreateAccountt(String login, Context context) {
+// TODO: 16.09.2018 move logic to loginPresenter
+
+        sharedPreferences = context.getApplicationContext().getSharedPreferences(login, Context.MODE_PRIVATE);
+        boolean possibilityToCreateAccount;
+        String validate = sharedPreferences.getString(login, "0");
+        if (validate.contentEquals("0")) {
+            possibilityToCreateAccount = true;
+
+        } else {
+            possibilityToCreateAccount = false;
+        }
+        return possibilityToCreateAccount;
+    }
+
+    @Override
+    public String getCurrentUserNamee() {
+        return currentUserName;
+    }
+
+    @Override
+    public String validateFirstLogInn(Context context, String login) {
+        sharedPreferences = context.getApplicationContext().getSharedPreferences(login, Context.MODE_PRIVATE);
+        String dataByLogin = sharedPreferences.getString(login, "0");
+        String firstLogIn = checkFirstLogInFromLogin(dataByLogin);
+
+        return firstLogIn;
+    }
+
+    @Override
+    public void setFirstLogInn(String firstLogIn) {
+        this.firstLogIn = firstLogIn;
+    }
+
+    @Override
+    public void changeFirstLogInn(Context context) {
+
+        String changedData;
+        sharedPreferences = context.getApplicationContext().getSharedPreferences(getCurrentUserName(), Context.MODE_PRIVATE);
+        String dataByLogin = sharedPreferences.getString(getCurrentUserName(), "0");
+        String dataToChange[] = getFirstLogInStatusFromLogin(dataByLogin);
+        dataToChange[0]="No";
+        changedData = dataToChange[0]+":"+dataToChange[1]+":"+dataToChange[2];
+
+        sharedPreferences
+                .edit()
+                .putString(getCurrentUserName(),changedData)
+                .apply();
+
+
     }
 
 

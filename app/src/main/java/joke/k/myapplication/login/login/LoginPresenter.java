@@ -9,13 +9,11 @@ import joke.k.myapplication.login.data.prefs.PrefsManager;
 
 public class LoginPresenter implements LoginContract.Presenter {
     private LoginContract.View view;
-private PrefsManager prefsManager;
 private DataManager dataManager;
 
 
-    public LoginPresenter(LoginContract.View view, PrefsManager prefsManager, DataManager dataManager) {
+    public LoginPresenter(LoginContract.View view, DataManager dataManager) {
         this.view = view;
-        this.prefsManager=prefsManager;
         this.dataManager=dataManager;
     }
 
@@ -27,7 +25,8 @@ private DataManager dataManager;
            String passwordFromData=dataManager.getPasswordByLoginn(login,context);
         if (passwordFromData.contentEquals(password)){
             isCorrect = true;
-            prefsManager.setCurrentUserName(login);
+            dataManager.setCurrentUserNamee(login);
+           // prefsManager.setCurrentUserName(login);
         } else if(passwordFromData.contentEquals("INC")){
             view.errorLoginFromSavedData();
             isCorrect = false;
@@ -65,11 +64,15 @@ private DataManager dataManager;
 
         }
         if (isNumberOfCharLegit) {
-        boolean isSignInInformationPassable = prefsManager.validateCreateAccount(login, context);
+       // boolean isSignInInformationPassable = prefsManager.validateCreateAccount(login, context);
+            boolean isSignInInformationPassable = dataManager.validateCreateAccountt(login, context);
         if(isSignInInformationPassable){
 
-                prefsManager.saveSignInInformation(login, password, city);
-                prefsManager.setCurrentUserName(login);
+              //  prefsManager.saveSignInInformation(login, password, city);
+                dataManager.saveSignInInformationn(login,password,city);
+
+                // prefsManager.setCurrentUserName(login);
+                    dataManager.setCurrentUserNamee(login);
                 view.sendConfirmRespondForSignIn();
             }
         }

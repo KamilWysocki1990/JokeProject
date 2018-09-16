@@ -21,8 +21,8 @@ public class LoginModule {
 
    @Provides
    @Singleton
-    LoginContract.Presenter provideLoginPresenter(PrefsManager prefsManager, DataManager DataManager){
-        return new LoginPresenter(view,prefsManager,DataManager);
+    LoginContract.Presenter provideLoginPresenter(DataManager dataManager){
+        return new LoginPresenter(view,dataManager);
    }
 
 }
