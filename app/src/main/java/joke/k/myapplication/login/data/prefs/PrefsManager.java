@@ -232,6 +232,11 @@ public class PrefsManager implements PrefsManagerInterface {
 
     }
 
+    @Override
+    public String getLoginNamee() {
+        return currentUserName;
+    }
+
 
 }
 

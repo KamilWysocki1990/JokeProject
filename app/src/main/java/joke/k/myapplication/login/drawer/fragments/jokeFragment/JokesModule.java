@@ -4,6 +4,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import joke.k.myapplication.login.data.DataManager;
 import joke.k.myapplication.login.data.network.Api;
 import joke.k.myapplication.login.data.dao.JokesDao;
 import joke.k.myapplication.login.data.prefs.PrefsManager;
@@ -23,8 +24,8 @@ public class JokesModule {
 
     @Provides
     @Singleton
-    JokesContract.Presenter provideJokesPresenter(Api api, JokesDao jokesDao, PrefsManager prefsManager){
-        return new JokesPresenter(view,api,jokesDao, prefsManager) {
+    JokesContract.Presenter provideJokesPresenter(Api api, JokesDao jokesDao, DataManager dataManager){
+        return new JokesPresenter(view,api,jokesDao,dataManager) {
         };
     }
 

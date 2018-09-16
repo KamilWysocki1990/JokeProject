@@ -61,4 +61,9 @@ public class AppDataManager implements DataManager {
     public void changeFirstLogInn(Context context) {
         prefsManager.changeFirstLogInn(context);
     }
+
+    @Override
+    public String getLoginNamee() {
+        return prefsManager.getLoginNamee();
+    }
 }

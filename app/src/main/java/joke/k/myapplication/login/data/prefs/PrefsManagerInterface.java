@@ -10,7 +10,8 @@ public interface PrefsManagerInterface {
     boolean validateCreateAccountt(String login,Context context);
     String getCurrentUserNamee();
     String validateFirstLogInn(Context context,String login);
-     void setFirstLogInn(String firstLogIn);
+    void setFirstLogInn(String firstLogIn);
     void changeFirstLogInn(Context context);
+    String getLoginNamee();
 }
 

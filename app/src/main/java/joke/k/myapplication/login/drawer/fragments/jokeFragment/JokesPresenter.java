@@ -11,6 +11,7 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
+import joke.k.myapplication.login.data.DataManager;
 import joke.k.myapplication.login.data.network.Api;
 import joke.k.myapplication.login.data.dao.JokesDao;
 import joke.k.myapplication.login.data.prefs.PrefsManager;
@@ -21,17 +22,18 @@ public class JokesPresenter implements JokesContract.Presenter, LifecycleObserve
     private Api api;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private RandomJokes randomJokes;
+    private DataManager dataManager;
     private JokesDao jokesDao;
-    private PrefsManager prefsManager;
+
     private float x2, x1;
 
   //  private int hour,minute;
 
-    public JokesPresenter(JokesContract.View view, Api api, JokesDao jokesDao, PrefsManager prefsManager) {
+    public JokesPresenter(JokesContract.View view, Api api, JokesDao jokesDao,DataManager dataManager) {
         this.view = view;
         this.api = api;
         this.jokesDao = jokesDao;
-        this.prefsManager = prefsManager;
+        this.dataManager = dataManager;
         ((LifecycleOwner) this.view).getLifecycle().addObserver(this);
     }
 
@@ -106,7 +108,9 @@ public class JokesPresenter implements JokesContract.Presenter, LifecycleObserve
 
     @Override
     public void addJokeToDatabase() {
-        randomJokes.setAccountName(prefsManager.getLoginName());
+      //  randomJokes.setAccountName(prefsManager.getLoginName());
+        randomJokes.setAccountName(dataManager.getLoginNamee());
+
         jokesDao.insert(randomJokes);
     }
 
