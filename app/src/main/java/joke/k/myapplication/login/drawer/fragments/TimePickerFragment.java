@@ -15,7 +15,7 @@ import joke.k.myapplication.R;
 
 public class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
 
-    TimeSetListenerForParentActivity TimePickerListener;
+    TimeSetListenerForParentActivity timePickerListener;
 
 
     public interface TimeSetListenerForParentActivity {
@@ -30,7 +30,7 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
     public void onAttach(Context context) {
         super.onAttach(context);
         if (context instanceof TimeSetListenerForParentActivity) {
-            TimePickerListener = (TimeSetListenerForParentActivity) context;
+            timePickerListener = (TimeSetListenerForParentActivity) context;
 
         } else {
             throw new ClassCastException(context.toString() + getString(R.string.class_cast_exception_in_time_picker));
@@ -61,14 +61,14 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
     }
 
     public void sendingTime() {
-        TimePickerListener.providingTimeFromTimePicker(choosenhour, chosenminutes);
+        timePickerListener.providingTimeFromTimePicker(choosenhour, chosenminutes);
     }
 
 
 
     @Override
     public void onDetach() {
-        TimePickerListener = null;
+        timePickerListener = null;
         super.onDetach();
 
 
@@ -77,10 +77,8 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
     @Override
     public void onCancel(DialogInterface dialog) {
         super.onCancel(dialog);
-        TimePickerListener.cancelSignal();
+        timePickerListener.cancelSignal();
     }
 
-    private void sendingCancelButtonClick() {
-        TimePickerListener.cancelSignal();
-    }
+
 }

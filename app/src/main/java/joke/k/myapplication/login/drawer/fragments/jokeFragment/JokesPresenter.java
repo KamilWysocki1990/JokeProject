@@ -113,7 +113,7 @@ public class JokesPresenter implements JokesContract.Presenter, LifecycleObserve
     @Override
     public void sendJokeNotification() {
         {
-            view.showProgress();
+
             compositeDisposable.add(api.getJokes()
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

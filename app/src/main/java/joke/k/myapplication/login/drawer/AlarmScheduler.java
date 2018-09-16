@@ -8,10 +8,9 @@ import java.util.Calendar;
 
 public class AlarmScheduler {
 
-    public static void scheduleAlarm(Context context,int alarmTimeHour, int alarmTimeMinute){
+    public static void scheduleAlarm(Context context, int alarmTimeHour, int alarmTimeMinute){
         AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         //PendingIntent pendingIntent = PendingIntent.getService(context,0,intent,PendingIntent.FLAG_CANCEL_CURRENT);
-
         PendingIntent operation = NotificationAlarmService.getReminderPendingIntent(context);
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY,alarmTimeHour);

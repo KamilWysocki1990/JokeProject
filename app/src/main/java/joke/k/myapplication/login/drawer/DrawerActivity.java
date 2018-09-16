@@ -3,6 +3,7 @@ package joke.k.myapplication.login.drawer;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -22,6 +23,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import butterknife.OnClick;
 import joke.k.myapplication.R;
 import joke.k.myapplication.login.JokeApplication;
 import joke.k.myapplication.login.drawer.fragments.webview.FirstWebview;
@@ -30,13 +32,9 @@ import joke.k.myapplication.login.drawer.fragments.TimePickerFragment;
 import joke.k.myapplication.login.drawer.fragments.databaseFragment.DatabaseFragment;
 import joke.k.myapplication.login.drawer.fragments.jokeFragment.JokesFragment;
 import joke.k.myapplication.login.drawer.fragments.webview.WebViewJoeMonster;
+import joke.k.myapplication.login.login.LoginActivity;
 
-public class DrawerActivity extends AppCompatActivity implements DrawerContract.View ,TimePickerFragment.TimeSetListenerForParentActivity {
-
-    int hourMilis;
-    int minuteMilis;
-
-
+public class DrawerActivity extends AppCompatActivity implements DrawerContract.View ,TimePickerFragment.TimeSetListenerForParentActivity,JokesFragment.CommunicationWithDrawerActivity {
 
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
@@ -47,22 +45,20 @@ public class DrawerActivity extends AppCompatActivity implements DrawerContract.
     @BindView(R.id.drawer_toolbar)
     Toolbar toolbar;
 
-    PassingCancelButton passingCancelButton;
     @Inject
     DrawerContract.Presenter presenter;
+
+
+    FragmentManager fragmentManager = getSupportFragmentManager();
+    boolean isCancelButtonClicked=false;
+    String actualJoke="Nothing to share right now";
 
 
     public DrawerActivity() {
     }
 
-    public interface PassingCancelButton {
-        void cancelButtonClick();
-    }
 
-    public void setOnDataListener(PassingCancelButton passingCancelButtonInterface) {
-        passingCancelButton = passingCancelButtonInterface;
 
-    }
 
 
     @Override
@@ -119,7 +115,9 @@ public class DrawerActivity extends AppCompatActivity implements DrawerContract.
 
     private void showFragment(int itemId) {
         String fragmentTag = String.valueOf(itemId);
-        FragmentManager fragmentManager = getSupportFragmentManager();
+        if(isCancelButtonClicked){
+            fragmentTag = null;
+        }
         if (fragmentManager.findFragmentByTag(fragmentTag) == null) {
             // there's no such a fragment on back stack - add it
             Fragment fragmentToAdd = null;
@@ -152,18 +150,65 @@ public class DrawerActivity extends AppCompatActivity implements DrawerContract.
             }
 
             if (fragmentToAdd != null) {
-                fragmentManager
-                        .beginTransaction()
-                        .replace(R.id.drawer_container, fragmentToAdd, fragmentTag)
-                        .addToBackStack(fragmentTag)
-                        .commit();
+                if(fragmentToAdd instanceof JokesFragment)
+                {
+                    setDataOnJokeFragment(fragmentToAdd);
+
+                }
+                if(!isCancelButtonClicked) {
+                    fragmentManager
+                            .beginTransaction()
+                            .replace(R.id.drawer_container, fragmentToAdd, fragmentTag)
+                            .addToBackStack(fragmentTag)
+                            .commit();
+                } else{
+                    removeJokeFragment(fragmentToAdd);
+                    recreateJokeFragment(fragmentTag, fragmentToAdd);
+                }
             }
+
+
         } else {
             // pop this fragment from back stack
             fragmentManager.popBackStackImmediate(fragmentTag, 0);
         }
     }
 
+    private void recreateJokeFragment(String fragmentTag, Fragment fragmentToAdd) {
+        fragmentManager.beginTransaction()
+                .add(R.id.drawer_container,fragmentToAdd,fragmentTag)
+                .commit();
+        isCancelButtonClicked=false;
+    }
+
+    private void removeJokeFragment(Fragment fragmentToAdd) {
+        fragmentManager.beginTransaction()
+                .remove(fragmentToAdd)
+                .commit();
+    }
+
+    private void setDataOnJokeFragment(Fragment fragmentJoke) {
+        Bundle bundle = new Bundle();
+        bundle.putBoolean("CancelClicked",isCancelButtonClicked);
+        fragmentJoke.setArguments(bundle);
+
+    }
+
+    @OnClick(R.id.shareButton)
+    public void shareText () {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_SUBJECT, actualJoke);
+        startActivity(Intent.createChooser(intent, "Choose your sharing method"));
+    }
+
+    @OnClick(R.id.logOutButton)
+    public void logOut () {
+        Intent intent = new Intent(getBaseContext(), LoginActivity.class);
+        finishAffinity();
+        startActivity(intent);
+        Toast.makeText(this,"You were successfully logged out",Toast.LENGTH_LONG).show();
+    }
 
     @Override
     public void providingTimeFromTimePicker(int hour, int minute) {
@@ -174,8 +219,14 @@ public class DrawerActivity extends AppCompatActivity implements DrawerContract.
 
     @Override
     public void cancelSignal() {
-        passingCancelButton.cancelButtonClick();
-    }
+        isCancelButtonClicked = true;
+        showFragment(R.id.item_drawer_joke_fragment);
+
+        }
+
+
+
+
 
 
     @Override
@@ -199,6 +250,13 @@ public class DrawerActivity extends AppCompatActivity implements DrawerContract.
         DialogFragment alertDialog = new AlertDialogFirstLogInInfo();
         alertDialog.show(getSupportFragmentManager(),"AlertDialog");
     }
+
+    @Override
+    public void sendActualJokeToShare(String askJoke, String askBody) {
+        actualJoke=askJoke+"\n"+askBody;
+    }
+
+
 
 
     public static class AlertDialogFirstLogInInfo extends DialogFragment {

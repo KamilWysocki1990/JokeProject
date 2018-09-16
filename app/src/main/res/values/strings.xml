@@ -14,6 +14,7 @@
     <string name="search_via_category">Search via Category</string>
     <string name="set_notification_time">Your time for everyday notifications :</string>
     <string name="class_cast_exception_in_time_picker">You need to implement Interface</string>
+    <string name="class_cast_exception_in_joke_fragment">You need to implement Interface</string>
     <string name="ErrorText">There is a problem with internet connection :((</string>
     <string name="channel_name">joke_notification</string>
     <string name="channel_description">channel_for_joke_notification</string>
