@@ -23,16 +23,14 @@ public class JokesPresenter implements JokesContract.Presenter, LifecycleObserve
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private RandomJokes randomJokes;
     private DataManager dataManager;
-    private JokesDao jokesDao;
+
 
     private float x2, x1;
 
-  //  private int hour,minute;
 
-    public JokesPresenter(JokesContract.View view, Api api, JokesDao jokesDao,DataManager dataManager) {
+    public JokesPresenter(JokesContract.View view, Api api,DataManager dataManager) {
         this.view = view;
         this.api = api;
-        this.jokesDao = jokesDao;
         this.dataManager = dataManager;
         ((LifecycleOwner) this.view).getLifecycle().addObserver(this);
     }
@@ -111,7 +109,8 @@ public class JokesPresenter implements JokesContract.Presenter, LifecycleObserve
       //  randomJokes.setAccountName(prefsManager.getLoginName());
         randomJokes.setAccountName(dataManager.getLoginNamee());
 
-        jokesDao.insert(randomJokes);
+       // jokesDao.insert(randomJokes);
+        dataManager.insert(randomJokes);
     }
 
     @Override

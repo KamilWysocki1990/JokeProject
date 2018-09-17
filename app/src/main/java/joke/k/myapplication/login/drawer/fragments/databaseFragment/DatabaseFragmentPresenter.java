@@ -32,6 +32,7 @@ public class DatabaseFragmentPresenter implements DatabaseFragmentContract.Prese
 
     @Override
     public void deleteJokeFromDatabase(int id) {
+
         jokesDao.delete(jokesDao.getJokeById(id));
     }
 

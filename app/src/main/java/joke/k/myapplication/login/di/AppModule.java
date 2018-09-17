@@ -9,6 +9,8 @@ import dagger.Provides;
 import joke.k.myapplication.login.ApplicationScope;
 import joke.k.myapplication.login.data.AppDataManager;
 import joke.k.myapplication.login.data.DataManager;
+import joke.k.myapplication.login.data.dao.JokesDao;
+import joke.k.myapplication.login.data.dao.JokesDaoInterface;
 import joke.k.myapplication.login.data.prefs.PrefsManager;
 import joke.k.myapplication.login.data.prefs.PrefsManagerInterface;
 
@@ -37,6 +39,12 @@ public class AppModule {
     @ApplicationScope
     PrefsManagerInterface providePrefsManagerInterface(PrefsManager prefsManager) {
         return prefsManager;
+    }
+
+    @Provides
+    @ApplicationScope
+    JokesDaoInterface provideJokesDaoInterface(JokesDao jokesDao){
+        return jokesDao;
     }
 
 

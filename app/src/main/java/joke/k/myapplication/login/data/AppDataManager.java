@@ -4,16 +4,21 @@ import android.content.Context;
 
 import javax.inject.Inject;
 
+import joke.k.myapplication.login.data.dao.JokesDao;
+import joke.k.myapplication.login.data.dao.JokesDaoInterface;
 import joke.k.myapplication.login.data.prefs.PrefsManagerInterface;
 
 public class AppDataManager implements DataManager {
 
-    PrefsManagerInterface prefsManager;
+    private PrefsManagerInterface prefsManager;
+    private JokesDaoInterface jokesDao;
+
 
     @Inject
-    public AppDataManager(PrefsManagerInterface prefsManagerInterface)
+    public AppDataManager(PrefsManagerInterface prefsManagerInterface, JokesDaoInterface jokesDao)
     {
         prefsManager=prefsManagerInterface;
+        this.jokesDao = jokesDao;
     }
 
 
@@ -65,5 +70,10 @@ public class AppDataManager implements DataManager {
     @Override
     public String getLoginNamee() {
         return prefsManager.getLoginNamee();
+    }
+
+    @Override
+    public void insert(RandomJokes randomJokes) {
+        jokesDao.insert(randomJokes);
     }
 }

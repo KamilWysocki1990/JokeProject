@@ -13,15 +13,17 @@ import java.util.List;
 import joke.k.myapplication.login.data.RandomJokes;
 
 @Dao
-public interface JokesDao {
+public interface JokesDao extends JokesDaoInterface  {
 
+   // @Override
     @Query("SELECT * FROM RandomJokes")
     List<RandomJokes> getAll();
 
-
+    @Override
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(RandomJokes randomJokes);
 
+  // @Override
     @Delete
     void delete(RandomJokes randomJokes);
 
