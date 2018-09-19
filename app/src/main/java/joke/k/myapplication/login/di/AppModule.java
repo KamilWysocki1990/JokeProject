@@ -2,8 +2,6 @@ package joke.k.myapplication.login.di;
 
 import android.content.Context;
 
-import javax.inject.Singleton;
-
 import dagger.Module;
 import dagger.Provides;
 import joke.k.myapplication.login.ApplicationScope;
@@ -40,6 +38,8 @@ public class AppModule {
     PrefsManagerInterface providePrefsManagerInterface(PrefsManager prefsManager) {
         return prefsManager;
     }
+
+
 
     @Provides
     @ApplicationScope

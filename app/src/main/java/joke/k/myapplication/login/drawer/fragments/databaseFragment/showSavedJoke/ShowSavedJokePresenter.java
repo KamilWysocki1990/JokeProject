@@ -1,22 +1,24 @@
 package joke.k.myapplication.login.drawer.fragments.databaseFragment.showSavedJoke;
 
+import joke.k.myapplication.login.data.DataManager;
 import joke.k.myapplication.login.data.dao.JokesDao;
 import joke.k.myapplication.login.data.RandomJokes;
 
 public class ShowSavedJokePresenter implements ShowSavedJokeContract.Presenter {
 
     ShowSavedJokeContract.View view;
-    JokesDao jokesDao;
     private RandomJokes joke;
+    private DataManager dataManager;
 
 
-    public ShowSavedJokePresenter(ShowSavedJokeContract.View view, JokesDao jokesDao) {
+    public ShowSavedJokePresenter(ShowSavedJokeContract.View view, DataManager dataManager) {
         this.view = view;
-        this.jokesDao = jokesDao;
+        this.dataManager=dataManager;
     }
     @Override
     public void handleJoke(int jokeId){
-    joke = jokesDao.getJokeById(jokeId);
+
+    joke = dataManager.getJokeById(jokeId);
     view.sendJokeFromDatabase(joke);
     }
 

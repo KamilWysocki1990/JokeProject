@@ -15,7 +15,6 @@ import joke.k.myapplication.login.data.RandomJokes;
 @Dao
 public interface JokesDao extends JokesDaoInterface  {
 
-   // @Override
     @Query("SELECT * FROM RandomJokes")
     List<RandomJokes> getAll();
 
@@ -23,13 +22,16 @@ public interface JokesDao extends JokesDaoInterface  {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(RandomJokes randomJokes);
 
-  // @Override
+  @Override
     @Delete
     void delete(RandomJokes randomJokes);
 
     @Query("SELECT * FROM RandomJokes WHERE id LIKE :jokeId LIMIT 1")
+    @Override
     RandomJokes getJokeById(int jokeId);
 
+
    @Query("SELECT *FROM RandomJokes WHERE accountName LIKE:account LIMIT 1000")
+   @Override
     List<RandomJokes> getJokeByAccount(String account);
 }

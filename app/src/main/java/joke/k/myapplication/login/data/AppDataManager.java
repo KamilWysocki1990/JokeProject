@@ -2,16 +2,22 @@ package joke.k.myapplication.login.data;
 
 import android.content.Context;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
-import joke.k.myapplication.login.data.dao.JokesDao;
+import io.reactivex.Flowable;
 import joke.k.myapplication.login.data.dao.JokesDaoInterface;
+import joke.k.myapplication.login.data.network.Api;
 import joke.k.myapplication.login.data.prefs.PrefsManagerInterface;
 
 public class AppDataManager implements DataManager {
 
     private PrefsManagerInterface prefsManager;
     private JokesDaoInterface jokesDao;
+
+    @Inject
+    Api api;
 
 
     @Inject
@@ -22,10 +28,7 @@ public class AppDataManager implements DataManager {
     }
 
 
-    @Override
-    public void sendDataToSave() {
 
-    }
 
     @Override
     public String getPasswordByLoginn(String login, Context context) {
@@ -75,5 +78,26 @@ public class AppDataManager implements DataManager {
     @Override
     public void insert(RandomJokes randomJokes) {
         jokesDao.insert(randomJokes);
+    }
+
+    @Override
+    public void delete(RandomJokes randomJokes) {
+        jokesDao.delete(randomJokes);
+    }
+
+    @Override
+    public RandomJokes getJokeById(int jokeId) {
+        return jokesDao.getJokeById(jokeId);
+    }
+
+    @Override
+    public List<RandomJokes> getJokeByAccount(String account) {
+       return jokesDao.getJokeByAccount(account);
+    }
+
+
+    @Override
+    public Flowable<RandomJokes> getJokes() {
+        return api.getJokes();
     }
 }

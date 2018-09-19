@@ -4,6 +4,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import joke.k.myapplication.login.data.DataManager;
 import joke.k.myapplication.login.data.dao.JokesDao;
 
 @Module
@@ -18,8 +19,8 @@ public class ShowSavedJokeModule {
 
     @Provides
     @Singleton
-    ShowSavedJokeContract.Presenter provideDatabaseFragmentPresenter(JokesDao jokesDao){
-        return new ShowSavedJokePresenter(view,jokesDao){
+    ShowSavedJokeContract.Presenter provideDatabaseFragmentPresenter( DataManager dataManager){
+        return new ShowSavedJokePresenter(view,dataManager){
 
         };
     }

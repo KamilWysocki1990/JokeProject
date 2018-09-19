@@ -19,7 +19,6 @@ import joke.k.myapplication.login.data.RandomJokes;
 
 public class JokesPresenter implements JokesContract.Presenter, LifecycleObserver {
     private JokesContract.View view;
-    private Api api;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private RandomJokes randomJokes;
     private DataManager dataManager;
@@ -28,9 +27,8 @@ public class JokesPresenter implements JokesContract.Presenter, LifecycleObserve
     private float x2, x1;
 
 
-    public JokesPresenter(JokesContract.View view, Api api,DataManager dataManager) {
+    public JokesPresenter(JokesContract.View view,DataManager dataManager) {
         this.view = view;
-        this.api = api;
         this.dataManager = dataManager;
         ((LifecycleOwner) this.view).getLifecycle().addObserver(this);
     }
@@ -49,7 +47,9 @@ public class JokesPresenter implements JokesContract.Presenter, LifecycleObserve
     public void getDataFromApi() {
         {
             view.showProgress();
-            compositeDisposable.add(api.getJokes()
+
+           // compositeDisposable.add(api.getJokes()
+                compositeDisposable.add(dataManager.getJokes()
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
@@ -117,7 +117,7 @@ public class JokesPresenter implements JokesContract.Presenter, LifecycleObserve
     public void sendJokeNotification() {
         {
 
-            compositeDisposable.add(api.getJokes()
+            compositeDisposable.add(dataManager.getJokes()
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
