@@ -24,6 +24,7 @@ import butterknife.OnTouch;
 import joke.k.myapplication.R;
 import joke.k.myapplication.login.JokeApplication;
 import joke.k.myapplication.login.data.RandomJokes;
+import joke.k.myapplication.login.drawer.AlarmScheduler;
 import joke.k.myapplication.login.drawer.DrawerActivity;
 import joke.k.myapplication.login.drawer.fragments.TimePickerFragment;
 
@@ -35,6 +36,7 @@ public class JokesFragment extends Fragment implements JokesContract.View {
 
     public interface CommunicationWithDrawerActivity {
         void sendActualJokeToShare(String askJoke, String askBody);
+
 
     }
 
@@ -70,9 +72,17 @@ public class JokesFragment extends Fragment implements JokesContract.View {
                 .plus(new JokesModule(this))
                 .inject(this);
 
+        toggleNotificationButtonOff.setChecked(true);
         boolean isClicked = getArguments().getBoolean("CancelClicked");
 
         shouldButtonNotificationBeTurnedOff(isClicked);
+
+        if(checkActiveAlarm()){
+            toggleNotificationButtonOn.setChecked(true);
+            toggleNotificationButtonOff.setChecked(false);
+        }
+
+
         return view;
 
 
@@ -169,13 +179,14 @@ public class JokesFragment extends Fragment implements JokesContract.View {
     public void passJoke(String askJoke, String bodyJoke) {
         notificationAskJoke = askJoke;
         notificationBodyJoke = bodyJoke;
+
     }
 
     @OnClick(R.id.switchButtonNotificationOff)
     public void notificationButtonOff() {
         actionButtonOff();
         Toast.makeText(getContext(), "Notification turned off", Toast.LENGTH_LONG).show();
-
+        cancelAlarm();
     }
 
     private void actionButtonOff() {
@@ -195,7 +206,20 @@ public class JokesFragment extends Fragment implements JokesContract.View {
     public void showProgress() {
         jokeProgress.setVisibility(View.VISIBLE);
     }
+
+    public void cancelAlarm(){
+        AlarmScheduler.cancelAlarm(getContext());
+    }
+
+    public boolean checkActiveAlarm(){
+        boolean isActive = AlarmScheduler.checkAlarm(getContext());
+    return isActive;
+    }
+
+
 }
+
+
 
 
 

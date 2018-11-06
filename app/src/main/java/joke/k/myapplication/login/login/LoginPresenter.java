@@ -3,9 +3,7 @@ package joke.k.myapplication.login.login;
 import android.content.Context;
 
 import joke.k.myapplication.R;
-import joke.k.myapplication.login.data.AppDataManager;
 import joke.k.myapplication.login.data.DataManager;
-import joke.k.myapplication.login.data.prefs.PrefsManager;
 
 public class LoginPresenter implements LoginContract.Presenter {
     private LoginContract.View view;
@@ -22,10 +20,10 @@ private DataManager dataManager;
     @Override
     public boolean sendDataToCheck(String login, String password, Context context) {
         boolean isCorrect;
-           String passwordFromData=dataManager.getPasswordByLoginn(login,context);
+           String passwordFromData=dataManager.getPasswordByLogin(login,context);
         if (passwordFromData.contentEquals(password)){
             isCorrect = true;
-            dataManager.setCurrentUserNamee(login);
+            dataManager.setCurrentUserName(login);
            // prefsManager.setCurrentUserName(login);
         } else if(passwordFromData.contentEquals("INC")){
             view.errorLoginFromSavedData();
@@ -65,14 +63,14 @@ private DataManager dataManager;
         }
         if (isNumberOfCharLegit) {
        // boolean isSignInInformationPassable = prefsManager.validateCreateAccount(login, context);
-            boolean isSignInInformationPassable = dataManager.validateCreateAccountt(login, context);
+            boolean isSignInInformationPassable = dataManager.validateCreateAccount(login, context);
         if(isSignInInformationPassable){
 
               //  prefsManager.saveSignInInformation(login, password, city);
-                dataManager.saveSignInInformationn(login,password,city);
+                dataManager.saveSignInInformation(login,password,city);
 
                 // prefsManager.setCurrentUserName(login);
-                    dataManager.setCurrentUserNamee(login);
+                    dataManager.setCurrentUserName(login);
                 view.sendConfirmRespondForSignIn();
             }
         }

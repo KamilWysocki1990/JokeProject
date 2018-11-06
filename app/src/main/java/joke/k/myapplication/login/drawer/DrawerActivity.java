@@ -4,6 +4,8 @@ package joke.k.myapplication.login.drawer;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -258,7 +260,6 @@ public class DrawerActivity extends AppCompatActivity implements DrawerContract.
 
 
 
-
     public static class AlertDialogFirstLogInInfo extends DialogFragment {
 
 
@@ -279,6 +280,7 @@ public class DrawerActivity extends AppCompatActivity implements DrawerContract.
                     });
 
             // Create the AlertDialog object and return it
+
             AlertDialog alertDialog = builder.create();
             return alertDialog;
         }

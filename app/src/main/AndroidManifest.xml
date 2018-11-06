@@ -3,6 +3,7 @@
     package="joke.k.myapplication">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
 
     <application
         android:name=".login.JokeApplication"
@@ -21,14 +22,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".login.drawer.DrawerActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
         <activity android:name=".login.drawer.fragments.databaseFragment.showSavedJoke.ShowSavedJokeActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
 
-        <service android:name=".login.drawer.NotificationAlarmService" />
+        <receiver android:name=".login.drawer.JokeAlarmReceiver" />
+
     </application>
+
 
 </manifest>

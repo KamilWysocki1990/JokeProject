@@ -24,7 +24,7 @@ public class JokesModule {
 
     @Provides
     @Singleton
-    JokesContract.Presenter provideJokesPresenter( DataManager dataManager){
+    JokesContract.Presenter provideJokesPresenter(DataManager dataManager){
         return new JokesPresenter(view,dataManager) {
         };
     }

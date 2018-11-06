@@ -1,9 +1,13 @@
 package joke.k.myapplication.login.drawer.fragments.jokeFragment;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleObserver;
 import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.OnLifecycleEvent;
+import android.content.Context;
+import android.content.Intent;
 import android.view.MotionEvent;
 
 
@@ -12,9 +16,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import joke.k.myapplication.login.data.DataManager;
-import joke.k.myapplication.login.data.network.Api;
-import joke.k.myapplication.login.data.dao.JokesDao;
-import joke.k.myapplication.login.data.prefs.PrefsManager;
 import joke.k.myapplication.login.data.RandomJokes;
 
 public class JokesPresenter implements JokesContract.Presenter, LifecycleObserver {
@@ -107,7 +108,7 @@ public class JokesPresenter implements JokesContract.Presenter, LifecycleObserve
     @Override
     public void addJokeToDatabase() {
       //  randomJokes.setAccountName(prefsManager.getLoginName());
-        randomJokes.setAccountName(dataManager.getLoginNamee());
+        randomJokes.setAccountName(dataManager.getLoginName());
 
        // jokesDao.insert(randomJokes);
         dataManager.insert(randomJokes);
@@ -125,7 +126,7 @@ public class JokesPresenter implements JokesContract.Presenter, LifecycleObserve
                                 // onNext
                                 this.randomJokes = randomJokes;
 
-                                view.passJoke(randomJokes.getSetup(),randomJokes.getPunchline());
+                                dataManager.setJokeForNotification(randomJokes.getSetup(),randomJokes.getPunchline());
                             },
                             throwable -> {
                                 // onError

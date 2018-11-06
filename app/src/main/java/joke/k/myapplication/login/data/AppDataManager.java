@@ -31,48 +31,58 @@ public class AppDataManager implements DataManager {
 
 
     @Override
-    public String getPasswordByLoginn(String login, Context context) {
-        return prefsManager.getPasswordByLoginn(login, context);
+    public String getPasswordByLogin(String login, Context context) {
+        return prefsManager.getPasswordByLogin(login, context);
     }
 
     @Override
-    public void setCurrentUserNamee(String login) {
-        prefsManager.setCurrentUserNamee(login);
+    public void setCurrentUserName(String login) {
+        prefsManager.setCurrentUserName(login);
     }
 
     @Override
-    public void saveSignInInformationn(String login, String password, String city) {
-        prefsManager.saveSignInInformationn(login,password,city);
+    public void saveSignInInformation(String login, String password, String city) {
+        prefsManager.saveSignInInformation(login,password,city);
     }
 
     @Override
-    public boolean validateCreateAccountt(String login, Context context) {
-        return prefsManager.validateCreateAccountt(login,context);
+    public boolean validateCreateAccount(String login, Context context) {
+        return prefsManager.validateCreateAccount(login,context);
     }
 
     @Override
-    public String getCurrentUserNamee() {
-        return prefsManager.getCurrentUserNamee();
+    public String getCurrentUserNameFromPrefs() {
+        return prefsManager.getCurrentUserNameFromPrefs();
     }
 
     @Override
-    public String validateFirstLogInn(Context context, String login) {
-        return prefsManager.validateFirstLogInn(context,login);
+    public String validateFirstLogIn(Context context, String login) {
+        return prefsManager.validateFirstLogIn(context,login);
     }
 
     @Override
-    public void setFirstLogInn(String firstLogIn) {
-        prefsManager.setFirstLogInn(firstLogIn);
+    public void setFirstLogIn(String firstLogIn) {
+        prefsManager.setFirstLogIn(firstLogIn);
     }
 
     @Override
-    public void changeFirstLogInn(Context context) {
-        prefsManager.changeFirstLogInn(context);
+    public void changeFirstLogIn(Context context) {
+        prefsManager.changeFirstLogIn(context);
     }
 
     @Override
-    public String getLoginNamee() {
-        return prefsManager.getLoginNamee();
+    public String getLoginName() {
+        return prefsManager.getLoginName();
+    }
+
+    @Override
+    public void setJokeForNotification(String askJoke, String bodyJoke) {
+        prefsManager.setJokeForNotification(askJoke, bodyJoke);
+    }
+
+    @Override
+    public String getJokeForNotification() {
+        return prefsManager.getJokeForNotification();
     }
 
     @Override

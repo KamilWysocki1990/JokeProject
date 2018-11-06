@@ -7,7 +7,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import joke.k.myapplication.login.data.DataManager;
-import joke.k.myapplication.login.data.prefs.PrefsManager;
 
 public class DrawerPresenter implements DrawerContract.Presenter {
 
@@ -46,14 +45,14 @@ public class DrawerPresenter implements DrawerContract.Presenter {
     @Override
     public void validateFirstLogIn(Context context) {
        // String isFirstLogIn = prefsManager.validateFirstLogIn(context,prefsManager.getCurrentUserName());
-       String isFirstLogIn = dataManager.validateFirstLogInn(context,dataManager.getCurrentUserNamee());
+       String isFirstLogIn = dataManager.validateFirstLogIn(context,dataManager.getCurrentUserNameFromPrefs());
        if(isFirstLogIn.contentEquals("Yes")){
 
          //  prefsManager.setFirstLogIn("No");
-           dataManager.setFirstLogInn("No");
+           dataManager.setFirstLogIn("No");
 
            //prefsManager.changeFirstLogIn(context);
-           dataManager.changeFirstLogInn(context);
+           dataManager.changeFirstLogIn(context);
 
            view.shouldDialogBeDisplayed();
 

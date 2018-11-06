@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import joke.k.myapplication.login.data.DataManager;
-import joke.k.myapplication.login.data.dao.JokesDao;
-import joke.k.myapplication.login.data.prefs.PrefsManager;
 import joke.k.myapplication.login.data.RandomJokes;
 
 public class DatabaseFragmentPresenter implements DatabaseFragmentContract.Presenter {
@@ -24,7 +22,7 @@ public class DatabaseFragmentPresenter implements DatabaseFragmentContract.Prese
 
     @Override
     public void getJokesFromRoom() {
-        view.updateList(dataManager.getJokeByAccount(dataManager.getCurrentUserNamee()));
+        view.updateList(dataManager.getJokeByAccount(dataManager.getCurrentUserNameFromPrefs()));
     }
 
     @Override

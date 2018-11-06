@@ -10,14 +10,8 @@ import joke.k.myapplication.login.ApplicationScope;
 
 public class PrefsManager implements PrefsManagerInterface {
 
-
-    public void setFirstLogIn(String firstLogIn) {
-        this.firstLogIn = firstLogIn;
-    }
-
-    public String getFirstLogIn() {
-        return firstLogIn;
-    }
+    private String holdActualAskJoke;
+    private String holdActualBodyJoke;
 
     private String firstLogIn = "Yes";
     private String currentUserName;
@@ -37,43 +31,7 @@ public class PrefsManager implements PrefsManagerInterface {
                 PREFS_FILE_NAME, Context.MODE_PRIVATE);
     }
 
-    public void saveSignInInformation(String login, String password, String city) {
 
-        sharedPreferences
-                .edit()
-                .putString(login, attachDataToLogin(password, city))
-                .apply();
-    }
-
-    public boolean validateCreateAccount(String login, Context context) {
-        sharedPreferences = context.getApplicationContext().getSharedPreferences(login, Context.MODE_PRIVATE);
-        boolean possibilityToCreateAccount;
-        String validate = sharedPreferences.getString(login, "0");
-        if (validate.contentEquals("0")) {
-            possibilityToCreateAccount = true;
-
-        } else {
-            possibilityToCreateAccount = false;
-        }
-        return possibilityToCreateAccount;
-    }
-
-    public String getPasswordByLogin(String login, Context context) {
-        String password;
-        String passwordFromData="0";
-
-        sharedPreferences = context.getApplicationContext().getSharedPreferences(login, Context.MODE_PRIVATE);
-        String dataByLogin = sharedPreferences.getString(login, "0");
-        if(!dataByLogin.contentEquals("0"))
-         passwordFromData = getDataFromLogin(dataByLogin);
-        if (passwordFromData.contentEquals("0")) {
-            password = "INC";
-        } else {
-            password = passwordFromData;
-        }
-
-        return password;
-    }
 
     public String attachDataToLogin(String password, String city) {
         String dataToSave = firstLogIn + ":" + password + ":" + city;
@@ -102,16 +60,7 @@ public class PrefsManager implements PrefsManagerInterface {
         return checkedCondition;
     }
 
-    public String validateFirstLogIn(Context context, String login) {
 
-
-        sharedPreferences = context.getApplicationContext().getSharedPreferences(login, Context.MODE_PRIVATE);
-        String dataByLogin = sharedPreferences.getString(login, "0");
-        String firstLogIn = checkFirstLogInFromLogin(dataByLogin);
-
-        return firstLogIn;
-
-    }
 
 
     public static String encrypt(String input) {
@@ -123,14 +72,74 @@ public class PrefsManager implements PrefsManagerInterface {
         return new String(Base64.decode(input, Base64.DEFAULT));
     }
 
-    public String getLoginName() {
+
+    @Override
+    public String getPasswordByLogin(String login, Context context) {
+        String password;
+        String passwordFromData="0";
+/// TODO: 16.09.2018 move logic to loginPresenter from prefs
+        sharedPreferences = context.getApplicationContext().getSharedPreferences(login, Context.MODE_PRIVATE);
+        String dataByLogin = sharedPreferences.getString(login, "0");
+        if(!dataByLogin.contentEquals("0"))
+            passwordFromData = getDataFromLogin(dataByLogin);
+        if (passwordFromData.contentEquals("0")) {
+            password = "INC";
+        } else {
+            password = passwordFromData;
+        }
+
+        return password;
+    }
+
+    @Override
+    public void setCurrentUserName(String login) {
+        currentUserName = login;
+    }
+
+    @Override
+    public void saveSignInInformation(String login, String password, String city) {
+        sharedPreferences
+                .edit()
+                .putString(login, attachDataToLogin(password, city))
+                .apply();
+    }
+
+    @Override
+    public boolean validateCreateAccount(String login, Context context) {
+// TODO: 16.09.2018 move logic to loginPresenter
+
+        sharedPreferences = context.getApplicationContext().getSharedPreferences(login, Context.MODE_PRIVATE);
+        boolean possibilityToCreateAccount;
+        String validate = sharedPreferences.getString(login, "0");
+        if (validate.contentEquals("0")) {
+            possibilityToCreateAccount = true;
+
+        } else {
+            possibilityToCreateAccount = false;
+        }
+        return possibilityToCreateAccount;
+    }
+
+    @Override
+    public String getCurrentUserNameFromPrefs() {
         return currentUserName;
     }
 
-    public void setCurrentUserName(String name) {
-        currentUserName = name;
+    @Override
+    public String validateFirstLogIn(Context context, String login) {
+        sharedPreferences = context.getApplicationContext().getSharedPreferences(login, Context.MODE_PRIVATE);
+        String dataByLogin = sharedPreferences.getString(login, "0");
+        String firstLogIn = checkFirstLogInFromLogin(dataByLogin);
+
+        return firstLogIn;
     }
 
+    @Override
+    public void setFirstLogIn(String firstLogIn) {
+        this.firstLogIn = firstLogIn;
+    }
+
+    @Override
     public void changeFirstLogIn(Context context) {
 
         String changedData;
@@ -149,92 +158,19 @@ public class PrefsManager implements PrefsManagerInterface {
     }
 
     @Override
-    public String getPasswordByLoginn(String login, Context context) {
-        String password;
-        String passwordFromData="0";
-/// TODO: 16.09.2018 move logic to loginPresenter from prefs
-        sharedPreferences = context.getApplicationContext().getSharedPreferences(login, Context.MODE_PRIVATE);
-        String dataByLogin = sharedPreferences.getString(login, "0");
-        if(!dataByLogin.contentEquals("0"))
-            passwordFromData = getDataFromLogin(dataByLogin);
-        if (passwordFromData.contentEquals("0")) {
-            password = "INC";
-        } else {
-            password = passwordFromData;
-        }
-
-        return password;
-    }
-
-    @Override
-    public void setCurrentUserNamee(String login) {
-        currentUserName = login;
-    }
-
-    @Override
-    public void saveSignInInformationn(String login, String password, String city) {
-        sharedPreferences
-                .edit()
-                .putString(login, attachDataToLogin(password, city))
-                .apply();
-    }
-
-    @Override
-    public boolean validateCreateAccountt(String login, Context context) {
-// TODO: 16.09.2018 move logic to loginPresenter
-
-        sharedPreferences = context.getApplicationContext().getSharedPreferences(login, Context.MODE_PRIVATE);
-        boolean possibilityToCreateAccount;
-        String validate = sharedPreferences.getString(login, "0");
-        if (validate.contentEquals("0")) {
-            possibilityToCreateAccount = true;
-
-        } else {
-            possibilityToCreateAccount = false;
-        }
-        return possibilityToCreateAccount;
-    }
-
-    @Override
-    public String getCurrentUserNamee() {
+    public String getLoginName() {
         return currentUserName;
     }
 
     @Override
-    public String validateFirstLogInn(Context context, String login) {
-        sharedPreferences = context.getApplicationContext().getSharedPreferences(login, Context.MODE_PRIVATE);
-        String dataByLogin = sharedPreferences.getString(login, "0");
-        String firstLogIn = checkFirstLogInFromLogin(dataByLogin);
-
-        return firstLogIn;
+    public void setJokeForNotification(String askJoke, String bodyJoke) {
+       holdActualAskJoke=askJoke;
+       holdActualBodyJoke=bodyJoke;
     }
 
     @Override
-    public void setFirstLogInn(String firstLogIn) {
-        this.firstLogIn = firstLogIn;
-    }
-
-    @Override
-    public void changeFirstLogInn(Context context) {
-
-        String changedData;
-        sharedPreferences = context.getApplicationContext().getSharedPreferences(getCurrentUserName(), Context.MODE_PRIVATE);
-        String dataByLogin = sharedPreferences.getString(getCurrentUserName(), "0");
-        String dataToChange[] = getFirstLogInStatusFromLogin(dataByLogin);
-        dataToChange[0]="No";
-        changedData = dataToChange[0]+":"+dataToChange[1]+":"+dataToChange[2];
-
-        sharedPreferences
-                .edit()
-                .putString(getCurrentUserName(),changedData)
-                .apply();
-
-
-    }
-
-    @Override
-    public String getLoginNamee() {
-        return currentUserName;
+    public String getJokeForNotification() {
+        return holdActualAskJoke+"\n"+holdActualBodyJoke;
     }
 
 
