@@ -18,6 +18,14 @@
         android:id="@+id/item_drawer_third"
         android:title="@string/search_via_category"
         android:icon="@drawable/ic_search_black_24dp"/>
+
+    <item
+        android:id="@+id/item_camera_share"
+        android:title="@string/Item_drawer_cameraShare"
+        android:icon="@drawable/ic_camera_black_24dp"/>
+
+
+
 </group>
 
     <item

@@ -62,6 +62,7 @@ public class DatabaseFragment extends Fragment implements DatabaseFragmentContra
 
         RecyclerView.ItemDecoration decoration = new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL);
         jokesRecycler.addItemDecoration(decoration);
+
     }
 
     @Override

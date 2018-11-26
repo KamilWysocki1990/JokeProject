@@ -28,6 +28,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import joke.k.myapplication.R;
 import joke.k.myapplication.login.JokeApplication;
+import joke.k.myapplication.login.drawer.fragments.cameraShare.CameraShare;
 import joke.k.myapplication.login.drawer.fragments.webview.FirstWebview;
 import joke.k.myapplication.login.drawer.fragments.webview.ThirdFragment;
 import joke.k.myapplication.login.drawer.fragments.TimePickerFragment;
@@ -138,6 +139,12 @@ public class DrawerActivity extends AppCompatActivity implements DrawerContract.
                     break;
                 }
 
+
+                case R.id.item_camera_share: {
+                    fragmentToAdd = new CameraShare();
+                    break;
+                }
+
                 case R.id.item_drawer_webview1: {
                     fragmentToAdd = new FirstWebview();
                     break;
@@ -200,7 +207,7 @@ public class DrawerActivity extends AppCompatActivity implements DrawerContract.
     public void shareText () {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_SUBJECT, actualJoke);
+        intent.putExtra(Intent.EXTRA_TEXT, actualJoke);
         startActivity(Intent.createChooser(intent, "Choose your sharing method"));
     }
 

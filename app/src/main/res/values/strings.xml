@@ -24,6 +24,10 @@
     <string name="text_in_nav_head">Fun App to</string>
     <string name="text_below_nav_head">Make you smile ! :)</string>
     <string name="joemonster">JoeMonster</string>
+    <string name="SecondTextInCameraFragment">See something fun ? SHARE IT ! :D</string>
+    <string name="Item_drawer_cameraShare">Camera Share</string>
+    <string name="permission_denied_message">You need to grant the access</string>
+
 
 
 </resources>
