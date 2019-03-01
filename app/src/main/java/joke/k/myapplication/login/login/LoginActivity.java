@@ -143,13 +143,20 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         dialogBuilder.setPositiveButton("Sign Me In !", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                if(dialogViewHolder.editTextPasswordSignIn.getText().toString()
+                        .contentEquals(dialogViewHolder.editTextPasswordConfirmationSignIn.getText().toString())) {
+                    presenter.onSignInButtonClick(
+                            dialogViewHolder.editTextLoginSignIn.getText().toString(),
+                            dialogViewHolder.editTextPasswordSignIn.getText().toString(),
+                            dialogViewHolder.editTextCitySignIn.getText().toString(),
+                            getBaseContext()
+                    );
 
-             presenter.onSignInButtonClick(
-                     dialogViewHolder.editTextLoginSignIn.getText().toString(),
-                     dialogViewHolder.editTextPasswordSignIn.getText().toString(),
-                     dialogViewHolder.editTextCitySignIn.getText().toString(),
-                     getBaseContext()
-             );
+                } else {
+                    Toast.makeText(getBaseContext(),"Password and Repeat password are different :(",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getBaseContext(),"Try again Sign In with correct passwords ",Toast.LENGTH_LONG).show();
+                }
+
             }
         });
         dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

@@ -57,6 +57,7 @@ public class DrawerActivity extends AppCompatActivity implements DrawerContract.
     String actualJoke="Nothing to share right now";
 
 
+
     public DrawerActivity() {
     }
 
@@ -135,8 +136,7 @@ public class DrawerActivity extends AppCompatActivity implements DrawerContract.
                     break;
                 }
                 case R.id.item_drawer_third: {
-                    fragmentToAdd = new ThirdFragment();
-                    break;
+                   break;
                 }
 
 

@@ -13,15 +13,15 @@ public class ShowSavedJokePresenter implements ShowSavedJokeContract.Presenter {
 
     public ShowSavedJokePresenter(ShowSavedJokeContract.View view, DataManager dataManager) {
         this.view = view;
-        this.dataManager=dataManager;
+        this.dataManager = dataManager;
     }
+
     @Override
-    public void handleJoke(int jokeId){
+    public void handleJoke(int jokeId) {
 
-    joke = dataManager.getJokeById(jokeId);
-    view.sendJokeFromDatabase(joke);
+        joke = dataManager.getJokeById(jokeId);
+        view.sendJokeFromDatabase(joke);
     }
-
 
 
 }

@@ -164,10 +164,6 @@ public class JokesPresenter implements JokesContract.Presenter, LifecycleObserve
 
     }
 
-
-
-
-
 }
 
 
